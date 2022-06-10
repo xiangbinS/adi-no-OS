@@ -67,7 +67,15 @@ static void ad74413r_format_reg_write(uint8_t reg, uint16_t val, uint8_t *buff)
 {
 	buff[0] = reg;
 	no_os_put_unaligned_be16(val, &buff[1]);
-	buff[2] = no_os_crc8(_crc_table, &buff[1], 2, 0);
+	buff[3] = no_os_crc8(_crc_table, buff, 3, 0);
+}
+
+int ad74413r_reg_write(struct ad74413r_desc *desc, uint32_t addr, uint16_t val)
+{
+	ad74413r_format_reg_write(addr, val, desc->comm_buff);
+
+	return no_os_spi_write_and_read(desc->comm_desc, desc->comm_buff,
+					AD74413R_FRAME_SIZE);
 }
 
 int ad74413r_reg_update(struct ad74413r_desc *desc, uint32_t addr, int16_t val,
@@ -86,41 +94,91 @@ int ad74413r_reg_update(struct ad74413r_desc *desc, uint32_t addr, int16_t val,
 	return ad74413r_reg_write(desc, addr, c_val);
 }
 
+int ad74413r_clear_errors(struct ad74413r_desc *desc)
+{
+	return ad74413r_reg_write(desc, AD74413R_ALERT_STATUS, AD74413R_ERR_CLR_MASK);
+}
+
+static int ad74413r_set_info(struct ad74413r_desc *desc, uint8_t val)
+{
+	return ad74413r_reg_write(desc, AD74413R_READ_SELECT, AD74413R_SPI_RD_RET_INFO_MASK);
+}
+
 int ad74413r_reg_read(struct ad74413r_desc *desc, uint32_t addr, uint16_t *val)
 {
 	int ret;
 	uint8_t expected_crc;
+	uint8_t b[4] = {0};
 
-	/** Reading a register on AD74413r requires writting the address to the READ_SELECT
+	/** Reading a register on AD74413r requires writing the address to the READ_SELECT
 	 * register first and then doing another spi read, which will contain the requested
 	 * register value.
-	*/
+	 */
 	ad74413r_format_reg_write(AD74413R_READ_SELECT, addr, desc->comm_buff);
+
+/*
+	struct no_os_spi_msg transfer[2] = {
+				{
+						.tx_buff = desc->comm_buff,
+						.bytes_number = AD74413R_FRAME_SIZE,
+						.cs_change = 1
+				},
+				{
+						.rx_buff = b,
+						.bytes_number = AD74413R_FRAME_SIZE
+				}
+		};
+
+	ret = no_os_spi_transfer(desc->comm_desc, transfer, NO_OS_ARRAY_SIZE(transfer));
+	if (ret)
+		return ret;
+*/
+
 	ret = no_os_spi_write_and_read(desc->comm_desc, desc->comm_buff,
 				       AD74413R_FRAME_SIZE);
 	if (ret)
 		return ret;
 
-	ret = no_os_spi_write_and_read(desc->comm_desc, desc->comm_buff,
-				       AD74413R_FRAME_SIZE);
+	ret = no_os_spi_write_and_read(desc->comm_desc, b, AD74413R_FRAME_SIZE);
 	if (ret)
 		return ret;
 
-	expected_crc = no_os_crc8(_crc_table, &desc->comm_buff[1], 2, 0);
-	if (expected_crc != desc->comm_buff[3])
-		return -ECOMM;
-
-	*val = no_os_get_unaligned_be16(&desc->comm_buff[1]);
+	/*
+	expected_crc = no_os_crc8(_crc_table, b, 3, 0);
+	if (expected_crc != b[3])
+		return -EINVAL;
+*/
+	*val = no_os_get_unaligned_be16(&b[1]);
 
 	return 0;
 }
 
-int ad74413r_reg_write(struct ad74413r_desc *desc, uint32_t addr, uint16_t val)
+static int ad74413r_check_crc(struct ad74413r_desc *desc)
 {
-	ad74413r_format_reg_write(addr, val, desc->comm_buff);
+	int ret;
+	uint16_t reg_val;
 
-	return no_os_spi_write_and_read(desc->comm_desc, desc->comm_buff,
-					AD74413R_FRAME_SIZE);
+	ret = ad74413r_reg_read(desc, AD74413R_ALERT_STATUS, &reg_val);
+	if (ret)
+		return ret;
+
+	return no_os_field_get(AD74413R_SPI_CRC_ERR_MASK, reg_val);
+}
+
+static int ad74413r_scratch(struct ad74413r_desc *desc)
+{
+	int ret;
+	uint16_t val;
+
+	ret = ad74413r_reg_write(desc, AD74413R_SCRATCH, 0x1234);
+	if (ret)
+		return ret;
+
+	ret = ad74413r_reg_read(desc, AD74413R_SCRATCH, &val);
+	if (ret)
+		return ret;
+
+	return 0;
 }
 
 int ad74413r_reset(struct ad74413r_desc *desc)
@@ -237,6 +295,25 @@ int ad74413r_set_adc_rate(struct ad74413r_desc *desc, uint32_t ch, uint32_t val)
 	return ad74413r_set_adc_rejection(desc, ch, rejection);
 }
 
+
+int ad74413r_set_adc_conv_seq(struct ad74413r_desc *desc,
+			      enum ad74413r_conv_seq status)
+{
+	int ret;
+
+	ret = ad74413r_reg_update(desc, AD74413R_ADC_CONV_CTRL, status,
+				  AD74413R_CONV_SEQ_MASK);
+	if (ret)
+		return ret;
+
+	/** The write to CONV_SEQ powers up the ADC. If the ADC was powered down, the user must wait
+	 * for 100us before the ADC starts making conversions.
+	 */
+	no_os_udelay(100);
+
+	return 0;
+}
+
 int ad74413r_get_adc_single(struct ad74413r_desc *desc, uint32_t ch,
 			    uint32_t *val)
 {
@@ -260,9 +337,9 @@ int ad74413r_get_adc_single(struct ad74413r_desc *desc, uint32_t ch,
 
 	/** Wait for this channel to complete the conversion */
 	if (delay < 1000)
-		no_os_delay_usec(delay);
+		no_os_udelay(delay);
 	else
-		no_os_delay_msec(delay);
+		no_os_mdelay(delay);
 
 	ret = ad74413r_get_raw_adc_result(desc, ch, val);
 	if (ret)
@@ -271,24 +348,6 @@ int ad74413r_get_adc_single(struct ad74413r_desc *desc, uint32_t ch,
 	ret = ad74413r_set_adc_conv_seq(desc, AD74413R_STOP_PWR_DOWN);
 	if (ret)
 		return ret;
-
-	return 0;
-}
-
-int ad74413r_set_adc_conv_seq(struct ad74413r_desc *desc,
-			      enum ad74413r_conv_seq status)
-{
-	int ret;
-
-	ret = ad74413r_reg_update(desc, AD74413R_ADC_CONV_CTRL, status,
-				  AD74413R_CONV_SEQ_MASK);
-	if (ret)
-		return ret;
-
-	/** The write to CONV_SEQ powers up the ADC. If the ADC was powered down, the user must wait
-	 * for 100us before the ADC starts making conversions.
-	 */
-	no_os_delay_usec(100);
 
 	return 0;
 }
@@ -358,6 +417,22 @@ int ad74413r_init(struct ad74413r_desc **desc,
 	ret = ad74413r_reset(descriptor);
 	if (ret)
 		return ret;
+
+	uint16_t rev;
+	ret = ad74413r_reg_read(descriptor, AD74413R_NOP, &rev);
+	if (ret)
+		return ret;
+
+	ret = ad74413r_clear_errors(descriptor);
+	if (ret)
+		return ret;
+
+	ret = ad74413r_scratch(descriptor);
+
+	/** Only for development */
+	ret = ad74413r_set_info(descriptor, 1);
+	if (ret)
+			return ret;
 
 	*desc = descriptor;
 

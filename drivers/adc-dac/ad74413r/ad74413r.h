@@ -43,12 +43,15 @@
 #define AD74413R_SCRATCH                        0x45
 #define AD74413R_SILICON_REV                    0x46
 
-#define AD74413R_ALERT_STATUS_RESET             0xFF
+#define AD74413R_ALERT_STATUS_RESET             NO_OS_GENMASK(15, 0)
 
 /** Software reset sequence */
 #define AD74413R_CMD_KEY_RESET_1                0x15FA
 #define AD74413R_CMD_KEY_RESET_2                0xAF51
 
+#define AD74413R_SPI_RD_RET_INFO_MASK			NO_OS_BIT(8)
+#define AD74413R_ERR_CLR_MASK					NO_OS_GENMASK(15, 0)
+#define AD74413R_SPI_CRC_ERR_MASK				NO_OS_BIT(13)
 #define AD74413R_CH_FUNC_SETUP_MASK             NO_OS_GENMASK(3, 0)
 #define AD74413R_CH_EN_MASK(x)                  NO_OS_BIT(x)
 #define AD74413R_ADC_RANGE_MASK                 NO_OS_GENMASK(7, 5)
@@ -94,8 +97,8 @@ enum ad74413r_conv_seq {
 };
 
 struct ad74413r_init_param {
-	struct no_os_spi_init_param comm_param
-	};
+	struct no_os_spi_init_param comm_param;
+};
 
 struct ad74413r_decimal {
 	int32_t integer;
@@ -109,8 +112,31 @@ struct ad74413r_channel_config {
 
 struct ad74413r_desc {
 	struct no_os_spi_desc *comm_desc;
-	uint8_t tx_comm_buff[4];
+	uint8_t comm_buff[4];
 	struct ad74413r_channel_config channel_configs[AD74413R_N_CHANNELS];
 };
 
 #endif _AD74413R_H // _AD74413R_H
+
+int ad74413r_reset(struct ad74413r_desc *);
+int ad74413r_set_channel_function(struct ad74413r_desc *,
+				  enum ad74413r_op_mode, uint32_t);
+int ad74413r_get_raw_adc_result(struct ad74413r_desc *, uint32_t,
+				int16_t *);
+int ad74413r_set_adc_channel_enable(struct ad74413r_desc *, uint32_t,
+				    bool);
+int ad74413r_set_adc_range(struct ad74413r_desc *, uint32_t,
+			   enum ad74413r_adc_range);
+int ad74413r_get_adc_rejection(struct ad74413r_desc *, uint32_t,
+			       enum ad74413r_rejection *);
+int ad74413r_set_adc_rejection(struct ad74413r_desc *, uint32_t,
+			       enum ad74413r_rejection);
+int ad74413r_get_adc_rate(struct ad74413r_desc *, uint32_t, uint32_t *);
+int ad74413r_set_adc_rate(struct ad74413r_desc *, uint32_t, uint32_t);
+int ad74413r_set_adc_conv_seq(struct ad74413r_desc *, enum ad74413r_conv_seq);
+int ad74413r_get_adc_single(struct ad74413r_desc *, uint32_t, uint32_t *);
+int ad74413r_set_debounce_mode(struct ad74413r_desc *, uint32_t, uint32_t);
+int ad74413r_set_debounce_time(struct ad74413r_desc *, uint32_t, uint32_t);
+int ad74413r_gpio_get(struct ad74413r_desc *, uint32_t, uint8_t *);
+int ad74413r_gpio_set_gpo_config(struct ad74413r_desc *, uint32_t, uint16_t);
+int ad74413r_init(struct ad74413r_desc **, struct ad74413r_init_param *);
