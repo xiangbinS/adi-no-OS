@@ -1,9 +1,9 @@
 /***************************************************************************//**
- *   @file   parameters.h
- *   @brief  Parameters definition for AD7616-SDZ.
- *   @author Antoniu Miclaus (antoniu.miclaus@analog.com)
+ *   @file   app_config.h
+ *   @brief  Config file of AD7616/API Driver.
+ *   @author DBogdan (dragos.bogdan@analog.com)
 ********************************************************************************
- * Copyright 2020(c) Analog Devices, Inc.
+ * Copyright 2015(c) Analog Devices, Inc.
  *
  * All rights reserved.
  *
@@ -36,37 +36,15 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *******************************************************************************/
+#ifndef CONFIG_H_
+#define CONFIG_H_
 
-#ifndef PARAMETERS_H_
-#define PARAMETERS_H_
-
-#include "app_config.h"
-
-/******************************************************************************/
-/********************** Macros and Constants Definitions **********************/
-/******************************************************************************/
-#if (HDL_AD7616_PARALLEL == 1)
-#define AD7616_CORE_BASEADDR	    XPAR_AXI_AD7616_BASEADDR
-#else
-#define AD7616_SPI_ENGINE_BASEADDR  XPAR_AXI_SPI_ENGINE_0_BASEADDR
+#ifndef IIO_SUPPORT
+#define HAVE_VERBOSE_MESSAGES /* Recommended during development prints errors and warnings */
+//#define HAVE_DEBUG_MESSAGES /* For Debug purposes only */
+#endif // USE_LIBIIO
+/*
+ * In case memory footprint is a concern these options allow
+ * to disable unused functionality which may free up a few kb
+ */
 #endif
-#define AD7616_DMA_BASEADDR			XPAR_AXI_AD7616_DMA_BASEADDR
-#define SPI_AD7616_CS				0
-#define AXI_PWMGEN_BASEADDR		    XPAR_AD7616_PWM_GEN_BASEADDR
-#define GPIO_DEVICE_ID				XPAR_PS7_GPIO_0_DEVICE_ID
-#define GPIO_OFFSET					32 + 54
-#define GPIO_ADC_CRCEN				GPIO_OFFSET + 0
-#define GPIO_ADC_CHSEL0				GPIO_OFFSET + 1
-#define GPIO_ADC_CHSEL1				GPIO_OFFSET + 2
-#define GPIO_ADC_CHSEL2				GPIO_OFFSET + 3
-#define GPIO_ADC_BURST				GPIO_OFFSET + 4
-#define GPIO_ADC_SEQEN				GPIO_OFFSET + 5
-#define GPIO_ADC_OS0				GPIO_OFFSET + 6
-#define GPIO_ADC_OS1				GPIO_OFFSET + 7
-#define GPIO_ADC_OS2				GPIO_OFFSET + 8
-#define GPIO_ADC_HW_RNGSEL0			GPIO_OFFSET + 9
-#define GPIO_ADC_HW_RNGSEL1			GPIO_OFFSET + 10
-#define GPIO_ADC_RESET_N			GPIO_OFFSET + 11
-#define ADC_DDR_BASEADDR			XPAR_DDR_MEM_BASEADDR + 0x800000
-
-#endif /* PARAMETERS_H_ */
