@@ -44,16 +44,19 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
-#include "spi_engine.h"
 #include <xil_cache.h>
 #include <xparameters.h>
+#include "ad7616.h"
+#include "app_config.h"
 #include "no_os_error.h"
 #include "no_os_spi.h"
-#include "spi_extra.h"
 #include "no_os_gpio.h"
 #include "gpio_extra.h"
-#include "ad7616.h"
 #include "parameters.h"
+#ifdef AD7616_SERIAL
+#include "spi_extra.h"
+#include "spi_engine.h"
+#endif
 
 #include "no_os_print_log.h"
 
@@ -61,7 +64,7 @@
 /************************ Variables Definitions *******************************/
 /******************************************************************************/
 #define AD7616_SDZ_SAMPLE_NO 1000
-
+#ifdef AD7616_SERIAL
 struct spi_engine_offload_init_param spi_engine_offload_init_param = {
 	.offload_config = OFFLOAD_RX_EN,
 	.rx_dma_baseaddr = AD7616_DMA_BASEADDR,
@@ -70,7 +73,7 @@ struct spi_engine_offload_init_param spi_engine_offload_init_param = {
 struct spi_engine_init_param spi_eng_init_param  = {
 	.ref_clk_hz = 100000000,
 	.type = SPI_ENGINE,
-	.spi_engine_baseaddr = AD7616_CORE_BASEADDR,
+	.spi_engine_baseaddr = AD7616_SPI_ENGINE_BASEADDR,
 	.cs_delay = 1,
 	.data_width = 8,
 };
@@ -82,6 +85,7 @@ struct no_os_spi_init_param ad7616_spi_init = {
 	.platform_ops = &spi_eng_platform_ops,
 	.extra = (void*)&spi_eng_init_param,
 };
+#endif
 
 struct xil_gpio_init_param xil_gpio_param = {
 	.device_id = GPIO_DEVICE_ID,
@@ -94,10 +98,12 @@ struct no_os_gpio_init_param ad7616_gpio_reset = {
 };
 
 struct ad7616_init_param init_param = {
+#ifdef AD7616_SERIAL
 	/* SPI */
 	.spi_param = &ad7616_spi_init,
 	.offload_init_param = &spi_engine_offload_init_param,
 	.reg_access_speed = 1000000,
+#endif
 	/* GPIO */
 	.gpio_hw_rngsel0_param = NULL,
 	.gpio_hw_rngsel1_param = NULL,
@@ -105,8 +111,10 @@ struct ad7616_init_param init_param = {
 	.gpio_os1_param = NULL,
 	.gpio_os2_param = NULL,
 	.gpio_reset_param = &ad7616_gpio_reset,
+#ifdef AD7616_PARALLEL
 	/* AXI Core */
 	.core_baseaddr = AD7616_CORE_BASEADDR,
+#endif
 	/* Device Settings */
 	.mode = AD7616_SW,
 	.va = {
@@ -121,6 +129,7 @@ struct ad7616_init_param init_param = {
 	.dcache_invalidate_range =
 	(void (*)(uint32_t, uint32_t))Xil_DCacheInvalidateRange,
 };
+
 
 /***************************************************************************//**
 * @brief main
