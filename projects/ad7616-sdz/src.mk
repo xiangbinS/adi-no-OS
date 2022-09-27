@@ -15,6 +15,7 @@ SRCS += $(DRIVERS)/adc/ad7616/ad7616.c \
 	$(DRIVERS)/api/no_os_gpio.c \
 	$(DRIVERS)/axi_core/axi_dmac/axi_dmac.c \
 	$(DRIVERS)/axi_core/spi_engine/spi_engine.c \
+	$(DRIVERS)/axi_core/axi_pwmgen/axi_pwm.c \
 	$(NO-OS)/util/no_os_util.c
 SRCS +=	$(PLATFORM_DRIVERS)/axi_io.c \
 	$(PLATFORM_DRIVERS)/xilinx_spi.c \
