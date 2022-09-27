@@ -46,13 +46,14 @@
 /********************** Macros and Constants Definitions **********************/
 /******************************************************************************/
 #ifdef AD7616_PARALLEL
-#define AD7616_CORE_BASEADDR		XPAR_AXI_AD7616_BASEADDR
+#define AD7616_CORE_BASEADDR		        XPAR_AXI_AD7616_BASEADDR
 #endif
 #ifdef AD7616_SERIAL
-#define AD7616_SPI_ENGINE_BASEADDR	XPAR_AXI_SPI_ENGINE_0_BASEADDR
+#define AD7616_SPI_ENGINE_BASEADDR	        XPAR_AXI_SPI_ENGINE_0_BASEADDR
 #endif
 #define AD7616_DMA_BASEADDR			XPAR_AXI_AD7616_DMA_BASEADDR
 #define SPI_AD7616_CS				0
+#define AXI_PWMGEN_BASEADDR		        XPAR_CNV_GENERATOR_BASEADDR
 #define GPIO_DEVICE_ID				XPAR_PS7_GPIO_0_DEVICE_ID
 #define GPIO_OFFSET					32 + 54
 #define GPIO_ADC_CRCEN				GPIO_OFFSET + 0

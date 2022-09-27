@@ -47,6 +47,8 @@
 #include <xil_cache.h>
 #include <xparameters.h>
 #include "ad7616.h"
+#include "no_os_pwm.h"
+#include "axi_pwm_extra.h"
 #include "app_config.h"
 #include "no_os_error.h"
 #include "no_os_spi.h"
@@ -75,7 +77,7 @@ struct spi_engine_init_param spi_eng_init_param  = {
 	.type = SPI_ENGINE,
 	.spi_engine_baseaddr = AD7616_SPI_ENGINE_BASEADDR,
 	.cs_delay = 1,
-	.data_width = 8,
+	.data_width = 16,
 };
 
 struct no_os_spi_init_param ad7616_spi_init = {
@@ -86,6 +88,18 @@ struct no_os_spi_init_param ad7616_spi_init = {
 	.extra = (void*)&spi_eng_init_param,
 };
 #endif
+
+struct axi_pwm_init_param axi_pwm_init = {
+	.base_addr = AXI_PWMGEN_BASEADDR,
+	.ref_clock_Hz = 100000000,
+};
+
+struct no_os_pwm_init_param trigger_pwm_init = {
+	.period_ns = 100,	/* 10Mhz */
+	.duty_cycle_ns = AD7616_TRIGGER_PULSE_WIDTH_NS,  /* pulse_width = 5 */
+	.polarity = NO_OS_PWM_POLARITY_HIGH,
+	.extra = &axi_pwm_init,
+};
 
 struct xil_gpio_init_param xil_gpio_param = {
 	.device_id = GPIO_DEVICE_ID,
@@ -138,6 +152,7 @@ int main(void)
 {
 	struct ad7616_dev	*dev;
 	uint32_t* buf = XPAR_PS7_DDR_0_S_AXI_BASEADDR;
+	uint32_t i;
 
 	Xil_ICacheEnable();
 	Xil_DCacheEnable();
@@ -150,6 +165,11 @@ int main(void)
 		ad7616_read_data_parallel(dev, buf, AD7616_SDZ_SAMPLE_NO);
 	else
 		ad7616_read_data_serial(dev, buf, AD7616_SDZ_SAMPLE_NO);
+
+	for (i = 0; i < AD7616_SDZ_SAMPLE_NO; i++) {
+		pr_info("ADC sample %lu : %lu \n", i * 2, buf[i] >> 16);
+		pr_info("ADC sample %lu : %lu \n", (i * 2) + 1, buf[i] & 0xFFFF);
+	}
 
 	pr_info("Capture done. \n");
 
