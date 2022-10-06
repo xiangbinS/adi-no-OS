@@ -44,13 +44,17 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "spi_engine.h"
 #include "axi_dmac.h"
 #include "no_os_gpio.h"
 #include "ad7616.h"
 #include "no_os_error.h"
 #include "no_os_delay.h"
 #include "no_os_axi_io.h"
+#include "no_os_pwm.h"
+#ifdef AD7616_SERIAL
+#include "spi_extra.h"
+#include "spi_engine.h"
+#endif
 
 /**
  * Read from device.
@@ -392,9 +396,13 @@ int32_t ad7616_read_data_serial(struct ad7616_dev *dev,
 	struct spi_engine_offload_message msg;
 	uint32_t spi_eng_msg_cmds[3] = {
 		CS_LOW,
-		READ(2),
+		READ(1),
 		CS_HIGH,
 	};
+
+	ret = no_os_pwm_enable(dev->trigger_pwm_desc);
+		if (ret != 0)
+			return ret;
 
 	dev->spi_desc->mode = NO_OS_SPI_MODE_3;
 	spi_engine_set_speed(dev->spi_desc, dev->spi_desc->max_speed_hz);
@@ -592,10 +600,47 @@ int32_t ad7616_setup(struct ad7616_dev **device,
 	if (ret != 0)
 		return ret;
 
+	ret = no_os_pwm_init(&dev->trigger_pwm_desc, init_param->trigger_pwm_init);
+		if (ret != 0)
+			goto error_spi;
+
 	*device = dev;
 
 	if (!ret)
 		printf("AD7616 successfully initialized\n");
+
+	return ret;
+
+error_spi:
+	no_os_spi_remove(dev->spi_desc);
+
+error_dev:
+	free(dev);
+
+	return -1;
+}
+
+/**
+ * @brief Free the memory allocated by ad7616_setup().
+ * @param [in] dev - Pointer to the device handler.
+ * @return 0 in case of success, -1 otherwise
+ */
+int32_t ad7616_remove(struct ad7616_dev *dev)
+{
+	int32_t ret;
+
+	if (!dev)
+		return -1;
+
+	ret = no_os_pwm_remove(dev->trigger_pwm_desc);
+	if (ret != 0)
+		return ret;
+
+	ret = no_os_spi_remove(dev->spi_desc);
+	if (ret != 0)
+		return ret;
+
+	free(dev);
 
 	return ret;
 }

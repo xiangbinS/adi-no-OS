@@ -130,6 +130,7 @@ struct ad7616_init_param init_param = {
 	.core_baseaddr = AD7616_CORE_BASEADDR,
 #endif
 	/* Device Settings */
+	.trigger_pwm_init = &trigger_pwm_init,
 	.mode = AD7616_SW,
 	.va = {
 		AD7616_10V, AD7616_10V, AD7616_10V, AD7616_10V,
@@ -167,8 +168,8 @@ int main(void)
 		ad7616_read_data_serial(dev, buf, AD7616_SDZ_SAMPLE_NO);
 
 	for (i = 0; i < AD7616_SDZ_SAMPLE_NO; i++) {
-		pr_info("ADC sample %lu : %lu \n", i * 2, buf[i] >> 16);
-		pr_info("ADC sample %lu : %lu \n", (i * 2) + 1, buf[i] & 0xFFFF);
+		pr_info("ADC sample %li : %li \n", i * 2, buf[i] >> 16);
+		pr_info("ADC sample %li : %li \n", (i * 2) + 1, buf[i] & 0xFFFF);
 	}
 
 	pr_info("Capture done. \n");

@@ -41,6 +41,10 @@
 #define AD7616_H_
 
 #include "no_os_gpio.h"
+#include "no_os_pwm.h"
+#ifdef AD7616_SERIAL
+#include "spi_engine.h"
+#endif
 
 /******************************************************************************/
 /********************** Macros and Constants Definitions **********************/
@@ -152,6 +156,8 @@ struct ad7616_dev {
 	struct no_os_gpio_desc	*gpio_os0;
 	struct no_os_gpio_desc	*gpio_os1;
 	struct no_os_gpio_desc	*gpio_os2;
+	/** PWM */
+	struct no_os_pwm_desc *trigger_pwm_desc;
 	/* AXI Core */
 	uint32_t core_baseaddr;
 	/* Device Settings */
@@ -175,6 +181,8 @@ struct ad7616_init_param {
 	no_os_gpio_init_param		*gpio_os0_param;
 	no_os_gpio_init_param		*gpio_os1_param;
 	no_os_gpio_init_param		*gpio_os2_param;
+	/** PWM */
+	struct no_os_pwm_init_param *trigger_pwm_init;
 	/* Core */
 	uint32_t			core_baseaddr;
 	/* Device Settings */
