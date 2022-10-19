@@ -55,13 +55,12 @@
 #include "no_os_gpio.h"
 #include "gpio_extra.h"
 #include "parameters.h"
-#ifdef AD7616_SERIAL
 #include "spi_extra.h"
 #include "spi_engine.h"
-#endif
 
 #include "no_os_print_log.h"
 
+#define AD7616_SERIAL
 /******************************************************************************/
 /************************ Variables Definitions *******************************/
 /******************************************************************************/
@@ -95,8 +94,8 @@ struct axi_pwm_init_param axi_pwm_init = {
 };
 
 struct no_os_pwm_init_param trigger_pwm_init = {
-	.period_ns = 100,	/* 10Mhz */
-	.duty_cycle_ns = AD7616_TRIGGER_PULSE_WIDTH_NS,  /* pulse_width = 5 */
+	.period_ns = 1000,	/* 1Mhz */
+	.duty_cycle_ns = AD7616_TRIGGER_PULSE_WIDTH_NS,  /* pulse_width = 50 */
 	.polarity = NO_OS_PWM_POLARITY_HIGH,
 	.extra = &axi_pwm_init,
 };

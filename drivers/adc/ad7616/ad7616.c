@@ -51,10 +51,10 @@
 #include "no_os_delay.h"
 #include "no_os_axi_io.h"
 #include "no_os_pwm.h"
-#ifdef AD7616_SERIAL
+//#ifdef AD7616_SERIAL
 #include "spi_extra.h"
 #include "spi_engine.h"
-#endif
+//#endif
 
 /**
  * Read from device.
@@ -393,7 +393,9 @@ int32_t ad7616_read_data_serial(struct ad7616_dev *dev,
 {
 	int32_t ret;
 	uint32_t commands_data[1] = {0x00};
+
 	struct spi_engine_offload_message msg;
+
 	uint32_t spi_eng_msg_cmds[3] = {
 		CS_LOW,
 		READ(1),
@@ -538,7 +540,7 @@ int32_t ad7616_setup(struct ad7616_dev **device,
 	dev->reg_access_speed = init_param->reg_access_speed;
 	dev->dcache_invalidate_range = init_param->dcache_invalidate_range;
 
-	ad7616_core_setup(dev);
+//	ad7616_core_setup(dev);
 
 	if (dev->interface == AD7616_SERIAL)
 		ret = no_os_spi_init(&dev->spi_desc, init_param->spi_param);
