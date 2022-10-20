@@ -53,6 +53,7 @@
 #include "no_os_error.h"
 #include "no_os_spi.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "xilinx_spi.h"
 #include "no_os_gpio.h"
 #include "xilinx_gpio.h"
@@ -61,6 +62,10 @@
 #include "no_os_gpio.h"
 #include "gpio_extra.h"
 >>>>>>> d6c513300... ad7616_sdz: Split serial and parallel interfaces
+=======
+#include "no_os_gpio.h"
+#include "gpio_extra.h"
+>>>>>>> d6c513300ed6ff01b20d11bf8154b89e6cff8a81
 #include "parameters.h"
 #if (HDL_AD7616_PARALLEL == 0)
 #include "spi_extra.h"
