@@ -44,24 +44,29 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
-#include "spi_engine.h"
 #include <xil_cache.h>
 #include <xparameters.h>
+#include "ad7616.h"
+#include "no_os_pwm.h"
+#include "axi_pwm_extra.h"
+#include "app_config.h"
 #include "no_os_error.h"
 #include "no_os_spi.h"
-#include "xilinx_spi.h"
 #include "no_os_gpio.h"
-#include "xilinx_gpio.h"
-#include "ad7616.h"
+#include "gpio_extra.h"
 #include "parameters.h"
-
+#if (HDL_AD7616_PARALLEL == 0)
+#include "spi_extra.h"
+#include "spi_engine.h"
+#endif
 #include "no_os_print_log.h"
 
+#define AD7616_SERIAL
 /******************************************************************************/
 /************************ Variables Definitions *******************************/
 /******************************************************************************/
 #define AD7616_SDZ_SAMPLE_NO 1000
-
+#if (HDL_AD7616_PARALLEL == 0)
 struct spi_engine_offload_init_param spi_engine_offload_init_param = {
 	.offload_config = OFFLOAD_RX_EN,
 	.rx_dma_baseaddr = AD7616_DMA_BASEADDR,
@@ -70,9 +75,9 @@ struct spi_engine_offload_init_param spi_engine_offload_init_param = {
 struct spi_engine_init_param spi_eng_init_param  = {
 	.ref_clk_hz = 100000000,
 	.type = SPI_ENGINE,
-	.spi_engine_baseaddr = AD7616_CORE_BASEADDR,
+	.spi_engine_baseaddr = AD7616_SPI_ENGINE_BASEADDR,
 	.cs_delay = 1,
-	.data_width = 8,
+	.data_width = 16,
 };
 
 struct no_os_spi_init_param ad7616_spi_init = {
@@ -81,6 +86,19 @@ struct no_os_spi_init_param ad7616_spi_init = {
 	.mode = NO_OS_SPI_MODE_2,
 	.platform_ops = &spi_eng_platform_ops,
 	.extra = (void*)&spi_eng_init_param,
+};
+#endif
+
+struct axi_pwm_init_param axi_pwm_init = {
+	.base_addr = AXI_PWMGEN_BASEADDR,
+	.ref_clock_Hz = 100000000,
+};
+
+struct no_os_pwm_init_param trigger_pwm_init = {
+	.period_ns = 1000,	/* 1Mhz */
+	.duty_cycle_ns = AD7616_TRIGGER_PULSE_WIDTH_NS,  /* pulse_width = 50 */
+	.polarity = NO_OS_PWM_POLARITY_HIGH,
+	.extra = &axi_pwm_init,
 };
 
 struct xil_gpio_init_param xil_gpio_param = {
@@ -94,10 +112,6 @@ struct no_os_gpio_init_param ad7616_gpio_reset = {
 };
 
 struct ad7616_init_param init_param = {
-	/* SPI */
-	.spi_param = &ad7616_spi_init,
-	.offload_init_param = &spi_engine_offload_init_param,
-	.reg_access_speed = 1000000,
 	/* GPIO */
 	.gpio_hw_rngsel0_param = NULL,
 	.gpio_hw_rngsel1_param = NULL,
@@ -105,9 +119,17 @@ struct ad7616_init_param init_param = {
 	.gpio_os1_param = NULL,
 	.gpio_os2_param = NULL,
 	.gpio_reset_param = &ad7616_gpio_reset,
+#if (HDL_AD7616_PARALLEL == 1)
 	/* AXI Core */
 	.core_baseaddr = AD7616_CORE_BASEADDR,
+#else
+	/* SPI */
+	.spi_param = &ad7616_spi_init,
+	.offload_init_param = &spi_engine_offload_init_param,
+	.reg_access_speed = 1000000,
+#endif
 	/* Device Settings */
+	.trigger_pwm_init = &trigger_pwm_init,
 	.mode = AD7616_SW,
 	.va = {
 		AD7616_10V, AD7616_10V, AD7616_10V, AD7616_10V,
@@ -122,14 +144,14 @@ struct ad7616_init_param init_param = {
 	(void (*)(uint32_t, uint32_t))Xil_DCacheInvalidateRange,
 };
 
+
 /***************************************************************************//**
 * @brief main
 *******************************************************************************/
 int main(void)
 {
 	struct ad7616_dev	*dev;
-	uint32_t buf[AD7616_SDZ_SAMPLE_NO] __attribute__ ((aligned));
-	uint32_t i;
+        uint32_t buf[AD7616_SDZ_SAMPLE_NO] __attribute__ ((aligned));
 
 	Xil_ICacheEnable();
 	Xil_DCacheEnable();
