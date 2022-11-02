@@ -59,8 +59,12 @@ int iio_example_main()
 {
 	int32_t status;
 
-	/* adc instance descriptor. */
-	struct adc_demo_desc *adc_desc;
+	/* Static memory allocation wanted */
+	struct adc_demo_desc adc;
+	struct adc_demo_desc *adc_desc = &adc;
+
+	/* Dynamic memory allocation wanted */
+	// struct adc_demo_desc *adc_desc = NULL;
 
 	/* dac instance descriptor. */
 	struct dac_demo_desc *dac_desc;

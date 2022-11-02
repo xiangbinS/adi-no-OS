@@ -75,6 +75,8 @@ struct adc_demo_desc {
 	uint32_t ext_buff_len;
 	/** Array of buffers for each channel*/
 	uint16_t **ext_buff;
+	/** True if dynamic memory allocation is used */
+	bool dynamic_mem;
 };
 
 /**

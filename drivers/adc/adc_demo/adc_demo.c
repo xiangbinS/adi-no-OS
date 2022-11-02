@@ -82,10 +82,16 @@ int32_t adc_demo_init(struct adc_demo_desc **desc,
 		      struct adc_demo_init_param *param)
 {
 	struct adc_demo_desc *adesc;
-	adesc = (struct adc_demo_desc*)calloc(1, sizeof(*adesc));
+	if (*desc == NULL) {
+		adesc = (struct adc_demo_desc*)calloc(1, sizeof(*adesc));
 
-	if(!adesc)
-		return -ENOMEM;
+		if(!adesc)
+			return -ENOMEM;
+		adesc->dynamic_mem = true;
+	} else {
+		adesc = *desc;
+		adesc->dynamic_mem = false;
+	}
 
 	adesc->ext_buff = param->ext_buff;
 	adesc->ext_buff_len = param->ext_buff_len;
@@ -104,7 +110,7 @@ int32_t adc_demo_init(struct adc_demo_desc **desc,
  */
 int32_t adc_demo_remove(struct adc_demo_desc *desc)
 {
-	if(!desc)
+	if(!desc || !desc->dynamic_mem)
 		return -EINVAL;
 
 	free(desc);
