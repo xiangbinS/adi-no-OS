@@ -215,6 +215,8 @@ struct iio_buffer {
 	uint32_t size;
 	/* Number of bytes per sample * number of active channels */
 	uint32_t bytes_per_scan;
+	/* Number of samples to read/write */
+	uint32_t nb_scans;
 	/* Buffer direction */
 	enum iio_buffer_direction dir;
 	/* Buffer where data is stored */
