@@ -53,10 +53,10 @@
  * @param param - The structure that contains the GPIO parameters.
  * @return 0 in case of success, -1 otherwise.
  */
-static int32_t _gpio_init(struct no_os_gpio_desc *desc,
+static int _gpio_init(struct no_os_gpio_desc *desc,
 			  const struct no_os_gpio_init_param *param)
 {
-	int32_t ret = 0;
+	int ret = 0;
 	struct chibios_gpio_desc *extra = desc->extra;
 	struct chibios_gpio_init_param *pextra = param->extra;
 
@@ -111,7 +111,7 @@ int32_t chibios_gpio_get(struct no_os_gpio_desc **desc,
 
 	descriptor->extra = extra;
 	ret = _gpio_init(descriptor, param);
-	if(ret < 0)
+	if (ret < 0)
 		goto error;
 
 	*desc = descriptor;
@@ -133,7 +133,7 @@ error:
 int32_t chibios_gpio_get_optional(struct no_os_gpio_desc **desc,
 				  const struct no_os_gpio_init_param *param)
 {
-	if(param == NULL) {
+	if (param == NULL) {
 		*desc = NULL;
 		return 0;
 	}

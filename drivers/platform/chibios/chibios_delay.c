@@ -3,7 +3,7 @@
  *   @brief  Implementation of chibios delay functions.
  *   @author Robert Budai (robert.budai@analog.com)
 ********************************************************************************
- * Copyright 2020(c) Analog Devices, Inc.
+ * Copyright 2023(c) Analog Devices, Inc.
  *
  * All rights reserved.
  *
@@ -39,11 +39,6 @@
 #include <stdbool.h>
 #include "hal.h"
 #include "no_os_delay.h"
-/**
- * @brief Generate microseconds delay.
- * @param usecs - Delay in microseconds.
- * @return None.
- */
 
 /**
  * @brief Generate miliseconds delay.
@@ -62,13 +57,13 @@ void no_os_mdelay(uint32_t msecs)
 struct no_os_time no_os_get_time(void)
 {
 	unsigned long long Xtime_Global;
-	float fractional_part = 0;
+	double fractional_part = 0;
 	struct no_os_time t;
 
 	Xtime_Global = chVTGetSystemTimeX();
 	t.s = Xtime_Global / 1000; // milliseconds
 
-	fractional_part = (float)Xtime_Global / 1000 - Xtime_Global / 1000;
+	fractional_part = (double)Xtime_Global / 1000 - Xtime_Global / 1000;
 	t.us = fractional_part * 1000;
 	t.us *= 1000;
 

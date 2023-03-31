@@ -39,7 +39,6 @@
 #ifndef CHIBIOS_I2C_H_
 #define CHIBIOS_I2C_H_
 
-
 #include <stdint.h>
 #include <string.h>
 #include "no_os_i2c.h"
@@ -61,7 +60,7 @@ struct chibios_i2c_desc {
 };
 
 /**
- * @struct
+ * @struct chibios_i2c_init_param
  * @brief ChibiOS i2c param struct
  *
  */

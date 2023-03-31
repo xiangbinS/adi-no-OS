@@ -3,7 +3,7 @@
  *   @brief  Header file for chibios gpio specifics.
  *   @author Robert Budai (robert.budai@analog.com)
 ********************************************************************************
- * Copyright 2020(c) Analog Devices, Inc.
+ * Copyright 2023(c) Analog Devices, Inc.
  *
  * All rights reserved.
  *
@@ -48,7 +48,6 @@
  * @struct chibios_gpio_init_param
  * @brief Structure holding the initialization parameters for chibios os
  */
-
 struct chibios_gpio_init_param {
 	/** Port */
 	ioportid_t port;

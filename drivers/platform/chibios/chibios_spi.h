@@ -3,7 +3,7 @@
  *   @brief  Header file for the chibios spi driver.
  *   @author Robert Budai (robert.budai@analog.com)
 ********************************************************************************
- * Copyright 2020(c) Analog Devices, Inc.
+ * Copyright 2023(c) Analog Devices, Inc.
  *
  * All rights reserved.
  *
@@ -38,7 +38,6 @@
 *******************************************************************************/
 #ifndef CHIBIOS_SPI_H_
 #define CHIBIOSs_SPI_H_
-
 
 #include <stdint.h>
 #include "no_os_spi.h"

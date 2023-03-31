@@ -61,7 +61,7 @@ __attribute__((weak)) void *no_os_malloc(size_t size)
 __attribute__((weak)) void *no_os_calloc(size_t nitems, size_t size)
 {
 	void *ptr = chHeapAlloc(NULL, size);
-	if (ptr!=NULL) {
+	if (ptr != NULL) {
 		for (int i = 0; i < (int)size; i++)
 			*((uint8_t *)ptr + i) = 0;
 		return ptr;
