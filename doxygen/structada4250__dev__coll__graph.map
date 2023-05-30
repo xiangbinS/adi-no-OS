@@ -1,0 +1,7 @@
+<map id="ada4250_dev" name="ada4250_dev">
+<area shape="rect" id="node1" title="ADA4250 Device Descriptor." alt="" coords="151,272,260,299"/>
+<area shape="rect" id="node2" href="$structno__os__spi__desc.html" title="Structure holding SPI descriptor." alt="" coords="33,95,156,121"/>
+<area shape="rect" id="node3" href="$structno__os__spi__platform__ops.html" title="Structure holding SPI function pointers that point to the platform specific function." alt="" coords="5,5,184,32"/>
+<area shape="rect" id="node4" href="$structno__os__gpio__desc.html" title="Structure holding the GPIO descriptor." alt="" coords="251,95,383,121"/>
+<area shape="rect" id="node5" href="$structno__os__gpio__platform__ops.html" title="Structure holding gpio function pointers that point to the platform specific function." alt="" coords="223,5,411,32"/>
+</map>

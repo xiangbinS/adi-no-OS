@@ -1,0 +1,17 @@
+<map id="iio_ad3552r_desc" name="iio_ad3552r_desc">
+<area shape="rect" id="node1" title=" " alt="" coords="835,145,969,172"/>
+<area shape="rect" id="node2" href="$structiio__device.html" title="Structure holding channels and attributes of a device." alt="" coords="629,145,717,172"/>
+<area shape="rect" id="node3" href="$structiio__channel.html" title="Struct describing the scan type." alt="" coords="371,64,467,91"/>
+<area shape="rect" id="node4" href="$structiio__attribute.html" title="Structure holding pointers to show and store functions." alt="" coords="49,125,150,152"/>
+<area shape="rect" id="node5" href="$structiio__chan__type.html" title="IIO channel types." alt="" coords="43,56,155,83"/>
+<area shape="rect" id="node6" href="$structscan__type.html" title=" " alt="" coords="55,5,143,32"/>
+<area shape="rect" id="node7" href="$structno__os__irq__ctrl__desc.html" title=" " alt="" coords="345,207,494,233"/>
+<area shape="rect" id="node8" href="$structno__os__irq__platform__ops.html" title="Structure holding IRQ function pointers that point to the platform specific function." alt="" coords="11,207,188,233"/>
+<area shape="rect" id="node9" href="$structad3552r__desc.html" title=" " alt="" coords="617,308,729,335"/>
+<area shape="rect" id="node10" href="$structad3552r__ch__data.html" title=" " alt="" coords="353,257,486,284"/>
+<area shape="rect" id="node11" href="$structad3552__transfer__config.html" title=" " alt="" coords="332,308,507,335"/>
+<area shape="rect" id="node12" href="$structno__os__spi__desc.html" title="Structure holding SPI descriptor." alt="" coords="358,397,481,424"/>
+<area shape="rect" id="node13" href="$structno__os__spi__platform__ops.html" title="Structure holding SPI function pointers that point to the platform specific function." alt="" coords="10,397,189,424"/>
+<area shape="rect" id="node14" href="$structno__os__gpio__desc.html" title="Structure holding the GPIO descriptor." alt="" coords="353,448,485,475"/>
+<area shape="rect" id="node15" href="$structno__os__gpio__platform__ops.html" title="Structure holding gpio function pointers that point to the platform specific function." alt="" coords="5,448,193,475"/>
+</map>

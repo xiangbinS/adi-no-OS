@@ -1,0 +1,13 @@
+<map id="projects/ad7124&#45;4sdz/src/ad7124&#45;4sdz.c" name="projects/ad7124&#45;4sdz/src/ad7124&#45;4sdz.c">
+<area shape="rect" id="node1" title="ad7124 application example." alt="" coords="230,5,391,47"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,95,72,121"/>
+<area shape="rect" id="node3" title=" " alt="" coords="97,95,183,121"/>
+<area shape="rect" id="node4" href="$ad7124_8h.html" title="AD7124 header file. Devices AD7124&#45;4, AD7124&#45;8." alt="" coords="208,95,291,121"/>
+<area shape="rect" id="node8" title=" " alt="" coords="315,95,432,121"/>
+<area shape="rect" id="node9" href="$xilinx__spi_8h.html" title=" " alt="" coords="456,95,552,121"/>
+<area shape="rect" id="node10" href="$no__os__error_8h.html" title="Error codes definition." alt="" coords="576,95,685,121"/>
+<area shape="rect" id="node5" title=" " alt="" coords="317,244,387,271"/>
+<area shape="rect" id="node6" href="$no__os__spi_8h.html" title="Header file of SPI Interface." alt="" coords="368,169,467,196"/>
+<area shape="rect" id="node7" href="$no__os__delay_8h.html" title="Header file of Delay functions." alt="" coords="230,169,343,196"/>
+<area shape="rect" id="node11" href="$errno_8h.html" title="Error macro definition for ARM Compiler." alt="" coords="597,169,665,196"/>
+</map>

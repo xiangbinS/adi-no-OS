@@ -1,0 +1,12 @@
+<map id="ad463x_init_param" name="ad463x_init_param">
+<area shape="rect" id="node1" title=" " alt="" coords="1013,108,1160,135"/>
+<area shape="rect" id="node2" href="$structaxi__clkgen__init.html" title=" " alt="" coords="691,5,811,32"/>
+<area shape="rect" id="node3" href="$structno__os__gpio__init__param.html" title="Structure holding the parameters for GPIO initialization." alt="" coords="342,84,514,111"/>
+<area shape="rect" id="node9" href="$structno__os__pwm__init__param.html" title="Structure containing the init parameters needed by the PWM generator." alt="" coords="663,56,839,83"/>
+<area shape="rect" id="node4" href="$structno__os__gpio__platform__ops.html" title="Structure holding gpio function pointers that point to the platform specific function." alt="" coords="5,84,193,111"/>
+<area shape="rect" id="node5" href="$structno__os__spi__init__param.html" title="Structure holding the parameters for SPI initialization." alt="" coords="669,169,832,196"/>
+<area shape="rect" id="node6" href="$structno__os__spi__desc.html" title="Structure holding SPI descriptor." alt="" coords="367,251,489,277"/>
+<area shape="rect" id="node7" href="$structno__os__spi__platform__ops.html" title="Structure holding SPI function pointers that point to the platform specific function." alt="" coords="10,184,189,211"/>
+<area shape="rect" id="node8" href="$structspi__engine__offload__init__param.html" title="Structure containing the init parameters needed by the offload module." alt="" coords="679,221,823,262"/>
+<area shape="rect" id="node10" href="$structno__os__pwm__platform__ops.html" title="Structure holding PWM function pointers that point to the platform specific function." alt="" coords="332,19,524,45"/>
+</map>

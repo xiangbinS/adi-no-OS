@@ -1,0 +1,14 @@
+<map id="drivers/frequency/hmc7044/hmc7044.c" name="drivers/frequency/hmc7044/hmc7044.c">
+<area shape="rect" id="node1" title="Implementation of HMC7044, HMC7043 Driver." alt="" coords="192,5,392,47"/>
+<area shape="rect" id="node2" title=" " alt="" coords="271,169,342,196"/>
+<area shape="rect" id="node3" title=" " alt="" coords="165,169,232,196"/>
+<area shape="rect" id="node4" href="$no__os__error_8h.html" title="Error codes definition." alt="" coords="5,95,115,121"/>
+<area shape="rect" id="node6" href="$no__os__util_8h.html" title="Header file of utility functions." alt="" coords="377,95,477,121"/>
+<area shape="rect" id="node9" href="$no__os__alloc_8h.html" title=" " alt="" coords="190,95,301,121"/>
+<area shape="rect" id="node10" href="$hmc7044_8h.html" title="Header file of HMC7044, HMC7043 Driver." alt="" coords="534,95,629,121"/>
+<area shape="rect" id="node5" href="$errno_8h.html" title="Error macro definition for ARM Compiler." alt="" coords="26,169,94,196"/>
+<area shape="rect" id="node7" title=" " alt="" coords="611,244,682,271"/>
+<area shape="rect" id="node8" title=" " alt="" coords="417,169,500,196"/>
+<area shape="rect" id="node11" href="$no__os__delay_8h.html" title="Header file of Delay functions." alt="" coords="525,169,638,196"/>
+<area shape="rect" id="node12" href="$no__os__spi_8h.html" title="Header file of SPI Interface." alt="" coords="663,169,761,196"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="ad7124_dev" name="ad7124_dev">
+<area shape="rect" id="node1" title=" " alt="" coords="65,184,167,211"/>
+<area shape="rect" id="node2" href="$structad7124__st__reg.html" title=" " alt="" coords="5,95,123,121"/>
+<area shape="rect" id="node3" href="$structno__os__spi__desc.html" title="Structure holding SPI descriptor." alt="" coords="147,95,269,121"/>
+<area shape="rect" id="node4" href="$structno__os__spi__platform__ops.html" title="Structure holding SPI function pointers that point to the platform specific function." alt="" coords="119,5,297,32"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="adxl355_dev" name="adxl355_dev">
+<area shape="rect" id="node1" title="ADXL355 Device structure." alt="" coords="129,273,235,300"/>
+<area shape="rect" id="node2" href="$unionadxl355__act__en__flags.html" title=" " alt="" coords="9,184,171,211"/>
+<area shape="rect" id="node3" href="$struct__adxl355__act__en__flags.html" title=" " alt="" coords="5,95,175,121"/>
+<area shape="rect" id="node4" href="$unionadxl355__comm__desc.html" title=" " alt="" coords="196,184,355,211"/>
+<area shape="rect" id="node5" href="$structno__os__spi__desc.html" title="Structure holding SPI descriptor." alt="" coords="206,95,329,121"/>
+<area shape="rect" id="node6" href="$structno__os__spi__platform__ops.html" title="Structure holding SPI function pointers that point to the platform specific function." alt="" coords="178,5,357,32"/>
+<area shape="rect" id="node7" href="$structno__os__i2c__desc.html" title="Structure holding I2C descriptor." alt="" coords="423,95,546,121"/>
+<area shape="rect" id="node8" href="$structno__os__i2c__platform__ops.html" title="Structure holding I2C function pointers that point to the platform specific function." alt="" coords="395,5,574,32"/>
+</map>

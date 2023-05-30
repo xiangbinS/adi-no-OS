@@ -1,0 +1,8 @@
+<map id="adxl367_init_param" name="adxl367_init_param">
+<area shape="rect" id="node1" title="Structure holding the parameters for ADXL367 device initialization." alt="" coords="113,273,263,300"/>
+<area shape="rect" id="node2" href="$structno__os__i2c__init__param.html" title="Structure holding the parameters for I2C initialization." alt="" coords="13,184,176,211"/>
+<area shape="rect" id="node3" href="$structno__os__i2c__platform__ops.html" title="Structure holding I2C function pointers that point to the platform specific function." alt="" coords="5,95,184,121"/>
+<area shape="rect" id="node4" href="$structno__os__spi__init__param.html" title="Structure holding the parameters for SPI initialization." alt="" coords="200,184,363,211"/>
+<area shape="rect" id="node5" href="$structno__os__spi__desc.html" title="Structure holding SPI descriptor." alt="" coords="372,95,495,121"/>
+<area shape="rect" id="node6" href="$structno__os__spi__platform__ops.html" title="Structure holding SPI function pointers that point to the platform specific function." alt="" coords="189,5,368,32"/>
+</map>

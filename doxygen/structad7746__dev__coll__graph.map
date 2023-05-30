@@ -1,0 +1,10 @@
+<map id="ad7746_dev" name="ad7746_dev">
+<area shape="rect" id="node1" title=" " alt="" coords="331,184,432,211"/>
+<area shape="rect" id="node2" href="$structad7746__setup.html" title=" " alt="" coords="254,95,367,121"/>
+<area shape="rect" id="node3" href="$structad7746__vt.html" title=" " alt="" coords="5,5,96,32"/>
+<area shape="rect" id="node4" href="$structad7746__config.html" title=" " alt="" coords="121,5,237,32"/>
+<area shape="rect" id="node5" href="$structad7746__exc.html" title=" " alt="" coords="261,5,361,32"/>
+<area shape="rect" id="node6" href="$structad7746__cap.html" title=" " alt="" coords="385,5,485,32"/>
+<area shape="rect" id="node7" href="$structno__os__i2c__desc.html" title="Structure holding I2C descriptor." alt="" coords="464,95,587,121"/>
+<area shape="rect" id="node8" href="$structno__os__i2c__platform__ops.html" title="Structure holding I2C function pointers that point to the platform specific function." alt="" coords="509,5,688,32"/>
+</map>

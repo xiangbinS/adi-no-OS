@@ -1,0 +1,10 @@
+<map id="adxl313_dev" name="adxl313_dev">
+<area shape="rect" id="node1" title="ADXL313 Device structure." alt="" coords="126,303,231,329"/>
+<area shape="rect" id="node2" href="$unionadxl313__act__inact__ctl__flags.html" title="Union holding the flags corresponding to ACT AC/DC and INACT AC/DC Bits." alt="" coords="5,199,168,240"/>
+<area shape="rect" id="node3" href="$struct__adxl313__act__inact__ctl__flags.html" title="Structure holding the flags corresponding to ACT AC/DC and INACT AC/DC Bits." alt="" coords="13,95,160,136"/>
+<area shape="rect" id="node4" href="$unionadxl313__comm__desc.html" title="Union holding the communication parameters." alt="" coords="193,206,351,233"/>
+<area shape="rect" id="node5" href="$structno__os__spi__desc.html" title="Structure holding SPI descriptor." alt="" coords="197,102,320,129"/>
+<area shape="rect" id="node6" href="$structno__os__spi__platform__ops.html" title="Structure holding SPI function pointers that point to the platform specific function." alt="" coords="169,5,348,32"/>
+<area shape="rect" id="node7" href="$structno__os__i2c__desc.html" title="Structure holding I2C descriptor." alt="" coords="415,102,537,129"/>
+<area shape="rect" id="node8" href="$structno__os__i2c__platform__ops.html" title="Structure holding I2C function pointers that point to the platform specific function." alt="" coords="387,5,565,32"/>
+</map>

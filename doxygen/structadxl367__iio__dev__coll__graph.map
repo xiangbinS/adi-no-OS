@@ -1,0 +1,15 @@
+<map id="adxl367_iio_dev" name="adxl367_iio_dev">
+<area shape="rect" id="node1" title=" " alt="" coords="824,192,952,219"/>
+<area shape="rect" id="node2" href="$structiio__device.html" title="Structure holding channels and attributes of a device." alt="" coords="591,120,679,147"/>
+<area shape="rect" id="node3" href="$structiio__channel.html" title="Struct describing the scan type." alt="" coords="349,95,445,121"/>
+<area shape="rect" id="node4" href="$structiio__attribute.html" title="Structure holding pointers to show and store functions." alt="" coords="44,25,145,52"/>
+<area shape="rect" id="node5" href="$structiio__chan__type.html" title="IIO channel types." alt="" coords="39,88,151,115"/>
+<area shape="rect" id="node6" href="$structscan__type.html" title=" " alt="" coords="51,139,139,165"/>
+<area shape="rect" id="node7" href="$structno__os__irq__ctrl__desc.html" title=" " alt="" coords="323,148,472,175"/>
+<area shape="rect" id="node8" href="$structno__os__irq__platform__ops.html" title="Structure holding IRQ function pointers that point to the platform specific function." alt="" coords="6,189,183,216"/>
+<area shape="rect" id="node9" href="$structadxl367__dev.html" title="ADXL367 Device structure." alt="" coords="583,240,688,267"/>
+<area shape="rect" id="node10" href="$structno__os__spi__desc.html" title="Structure holding SPI descriptor." alt="" coords="336,240,459,267"/>
+<area shape="rect" id="node11" href="$structno__os__spi__platform__ops.html" title="Structure holding SPI function pointers that point to the platform specific function." alt="" coords="5,240,184,267"/>
+<area shape="rect" id="node12" href="$structno__os__i2c__desc.html" title="Structure holding I2C descriptor." alt="" coords="336,291,459,317"/>
+<area shape="rect" id="node13" href="$structno__os__i2c__platform__ops.html" title="Structure holding I2C function pointers that point to the platform specific function." alt="" coords="5,291,184,317"/>
+</map>

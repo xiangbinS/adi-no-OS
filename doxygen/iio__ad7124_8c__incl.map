@@ -1,0 +1,21 @@
+<map id="drivers/adc/ad7124/iio_ad7124.c" name="drivers/adc/ad7124/iio_ad7124.c">
+<area shape="rect" id="node1" title="Implementation of iio_ad7124.c." alt="" coords="356,5,503,47"/>
+<area shape="rect" id="node2" title=" " alt="" coords="58,393,129,420"/>
+<area shape="rect" id="node3" title=" " alt="" coords="467,95,533,121"/>
+<area shape="rect" id="node4" title=" " alt="" coords="558,95,645,121"/>
+<area shape="rect" id="node5" title=" " alt="" coords="669,95,737,121"/>
+<area shape="rect" id="node6" href="$no__os__error_8h.html" title="Error codes definition." alt="" coords="761,95,871,121"/>
+<area shape="rect" id="node8" href="$iio_8h.html" title="Header file of iio." alt="" coords="313,169,364,196"/>
+<area shape="rect" id="node15" href="$iio__ad7124_8h.html" title="Header file of iio_ad7124." alt="" coords="286,95,391,121"/>
+<area shape="rect" id="node16" href="$no__os__util_8h.html" title="Header file of utility functions." alt="" coords="43,319,143,345"/>
+<area shape="rect" id="node17" href="$ad7124_8h.html" title="AD7124 header file. Devices AD7124&#45;4, AD7124&#45;8." alt="" coords="737,244,820,271"/>
+<area shape="rect" id="node7" href="$errno_8h.html" title="Error macro definition for ARM Compiler." alt="" coords="782,169,850,196"/>
+<area shape="rect" id="node9" href="$iio__types_8h.html" title="Header file for iio_types." alt="" coords="467,244,560,271"/>
+<area shape="rect" id="node13" href="$no__os__uart_8h.html" title="Header file of UART interface." alt="" coords="286,244,391,271"/>
+<area shape="rect" id="node10" title=" " alt="" coords="245,393,328,420"/>
+<area shape="rect" id="node11" title=" " alt="" coords="589,393,659,420"/>
+<area shape="rect" id="node12" href="$no__os__circular__buffer_8h.html" title="Circular buffer library header." alt="" coords="477,319,648,345"/>
+<area shape="rect" id="node14" href="$no__os__lf256fifo_8h.html" title="SPSC lock&#45;free fifo of fixed size (256), specialized for UART." alt="" coords="168,319,301,345"/>
+<area shape="rect" id="node18" href="$no__os__spi_8h.html" title="Header file of SPI Interface." alt="" coords="773,319,872,345"/>
+<area shape="rect" id="node19" href="$no__os__delay_8h.html" title="Header file of Delay functions." alt="" coords="897,319,1010,345"/>
+</map>

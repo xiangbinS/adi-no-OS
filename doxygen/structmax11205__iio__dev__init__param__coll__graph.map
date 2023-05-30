@@ -1,0 +1,11 @@
+<map id="max11205_iio_dev_init_param" name="max11205_iio_dev_init_param">
+<area shape="rect" id="node1" title=" " alt="" coords="1280,97,1453,138"/>
+<area shape="rect" id="node2" href="$structmax11205__init__param.html" title=" " alt="" coords="931,104,1099,131"/>
+<area shape="rect" id="node3" href="$structno__os__gpio__init__param.html" title="Structure holding the parameters for GPIO initialization." alt="" coords="649,36,821,63"/>
+<area shape="rect" id="node4" href="$structno__os__gpio__platform__ops.html" title="Structure holding gpio function pointers that point to the platform specific function." alt="" coords="323,5,511,32"/>
+<area shape="rect" id="node5" href="$structno__os__spi__init__param.html" title="Structure holding the parameters for SPI initialization." alt="" coords="654,104,817,131"/>
+<area shape="rect" id="node6" href="$structno__os__spi__desc.html" title="Structure holding SPI descriptor." alt="" coords="355,157,478,184"/>
+<area shape="rect" id="node7" href="$structno__os__spi__platform__ops.html" title="Structure holding SPI function pointers that point to the platform specific function." alt="" coords="5,92,184,119"/>
+<area shape="rect" id="node8" href="$structno__os__irq__ctrl__desc.html" title=" " alt="" coords="661,187,810,213"/>
+<area shape="rect" id="node9" href="$structno__os__irq__platform__ops.html" title="Structure holding IRQ function pointers that point to the platform specific function." alt="" coords="328,208,505,235"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="adis_validate_checksum" name="adis_validate_checksum">
+<area shape="rect" id="node1" title="Check if the checksum for burst data is correct." alt="" coords="215,5,397,32"/>
+<area shape="rect" id="node2" href="$adis_8h.html#ae08ffd3b0950a10f1ee0c801f641928c" title="Read burst data." alt="" coords="5,5,167,32"/>
+</map>

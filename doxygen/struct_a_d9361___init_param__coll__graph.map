@@ -1,0 +1,11 @@
+<map id="AD9361_InitParam" name="AD9361_InitParam">
+<area shape="rect" id="node1" title=" " alt="" coords="255,317,397,344"/>
+<area shape="rect" id="node2" href="$structno__os__gpio__init__param.html" title="Structure holding the parameters for GPIO initialization." alt="" coords="15,184,187,211"/>
+<area shape="rect" id="node3" href="$structno__os__gpio__platform__ops.html" title="Structure holding gpio function pointers that point to the platform specific function." alt="" coords="5,95,193,121"/>
+<area shape="rect" id="node4" href="$structaxi__adc__init.html" title="AXI ADC Initialization Parameters structure." alt="" coords="211,184,311,211"/>
+<area shape="rect" id="node5" href="$structno__os__spi__init__param.html" title="Structure holding the parameters for SPI initialization." alt="" coords="335,184,498,211"/>
+<area shape="rect" id="node6" href="$structno__os__spi__desc.html" title="Structure holding SPI descriptor." alt="" coords="357,95,479,121"/>
+<area shape="rect" id="node7" href="$structno__os__spi__platform__ops.html" title="Structure holding SPI function pointers that point to the platform specific function." alt="" coords="174,5,353,32"/>
+<area shape="rect" id="node8" href="$structaxi__dac__init.html" title=" " alt="" coords="556,184,656,211"/>
+<area shape="rect" id="node9" href="$structaxi__dac__channel.html" title=" " alt="" coords="574,95,705,121"/>
+</map>

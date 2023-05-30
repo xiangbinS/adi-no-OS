@@ -1,0 +1,8 @@
+<map id="adt7420_iio_dev" name="adt7420_iio_dev">
+<area shape="rect" id="node1" title="iio device descriptor." alt="" coords="138,273,267,300"/>
+<area shape="rect" id="node2" href="$structadt7420__dev.html" title=" " alt="" coords="149,184,256,211"/>
+<area shape="rect" id="node3" href="$structno__os__spi__desc.html" title="Structure holding SPI descriptor." alt="" coords="33,95,156,121"/>
+<area shape="rect" id="node4" href="$structno__os__spi__platform__ops.html" title="Structure holding SPI function pointers that point to the platform specific function." alt="" coords="5,5,184,32"/>
+<area shape="rect" id="node5" href="$structno__os__i2c__desc.html" title="Structure holding I2C descriptor." alt="" coords="251,95,373,121"/>
+<area shape="rect" id="node6" href="$structno__os__i2c__platform__ops.html" title="Structure holding I2C function pointers that point to the platform specific function." alt="" coords="223,5,401,32"/>
+</map>

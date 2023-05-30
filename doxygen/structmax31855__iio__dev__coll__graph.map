@@ -1,0 +1,15 @@
+<map id="max31855_iio_dev" name="max31855_iio_dev">
+<area shape="rect" id="node1" title=" " alt="" coords="915,157,1060,184"/>
+<area shape="rect" id="node2" href="$structmax31855__dev.html" title="MAX31855 descriptor." alt="" coords="633,95,756,121"/>
+<area shape="rect" id="node3" href="$structno__os__spi__desc.html" title="Structure holding SPI descriptor." alt="" coords="364,44,487,71"/>
+<area shape="rect" id="node4" href="$structno__os__spi__platform__ops.html" title="Structure holding SPI function pointers that point to the platform specific function." alt="" coords="18,44,197,71"/>
+<area shape="rect" id="node5" href="$unionmax31855__fault__sts.html" title=" " alt="" coords="348,95,503,121"/>
+<area shape="rect" id="node6" href="$struct__max31855__fault__sts__mask.html" title=" " alt="" coords="5,95,209,121"/>
+<area shape="rect" id="node7" href="$structiio__device.html" title="Structure holding channels and attributes of a device." alt="" coords="651,197,739,224"/>
+<area shape="rect" id="node8" href="$structiio__channel.html" title="Struct describing the scan type." alt="" coords="377,247,473,273"/>
+<area shape="rect" id="node9" href="$structiio__attribute.html" title="Structure holding pointers to show and store functions." alt="" coords="57,189,158,216"/>
+<area shape="rect" id="node10" href="$structiio__chan__type.html" title="IIO channel types." alt="" coords="51,253,163,280"/>
+<area shape="rect" id="node11" href="$structscan__type.html" title=" " alt="" coords="63,304,151,331"/>
+<area shape="rect" id="node12" href="$structno__os__irq__ctrl__desc.html" title=" " alt="" coords="351,329,500,356"/>
+<area shape="rect" id="node13" href="$structno__os__irq__platform__ops.html" title="Structure holding IRQ function pointers that point to the platform specific function." alt="" coords="19,355,196,381"/>
+</map>

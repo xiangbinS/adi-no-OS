@@ -1,0 +1,13 @@
+<map id="adis_chip_info" name="adis_chip_info">
+<area shape="rect" id="node1" title="ADIS specific chip information structure." alt="" coords="283,524,397,551"/>
+<area shape="rect" id="node2" href="$structadis__data__field__map__def.html" title="ADIS filed map definition structure." alt="" coords="5,420,189,447"/>
+<area shape="rect" id="node3" href="$structadis__field.html" title="ADIS device field structure." alt="" coords="55,184,139,211"/>
+<area shape="rect" id="node4" href="$structadis__timeout.html" title="ADIS chip timeouts." alt="" coords="213,420,320,447"/>
+<area shape="rect" id="node5" href="$structadis__clk__freq__limit.html" title="ADIS frequency limit for input synchronization clock." alt="" coords="345,420,490,447"/>
+<area shape="rect" id="node6" href="$structadis__init__param.html" title="ADIS device initialization parameters." alt="" coords="517,420,643,447"/>
+<area shape="rect" id="node7" href="$structno__os__gpio__init__param.html" title="Structure holding the parameters for GPIO initialization." alt="" coords="398,184,570,211"/>
+<area shape="rect" id="node8" href="$structno__os__gpio__platform__ops.html" title="Structure holding gpio function pointers that point to the platform specific function." alt="" coords="390,95,578,121"/>
+<area shape="rect" id="node9" href="$structno__os__spi__init__param.html" title="Structure holding the parameters for SPI initialization." alt="" coords="595,184,757,211"/>
+<area shape="rect" id="node10" href="$structno__os__spi__desc.html" title="Structure holding SPI descriptor." alt="" coords="767,95,889,121"/>
+<area shape="rect" id="node11" href="$structno__os__spi__platform__ops.html" title="Structure holding SPI function pointers that point to the platform specific function." alt="" coords="584,5,763,32"/>
+</map>

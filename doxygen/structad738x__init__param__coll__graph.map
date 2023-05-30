@@ -1,0 +1,7 @@
+<map id="ad738x_init_param" name="ad738x_init_param">
+<area shape="rect" id="node1" title=" " alt="" coords="145,288,292,315"/>
+<area shape="rect" id="node2" href="$structno__os__spi__init__param.html" title="Structure holding the parameters for SPI initialization." alt="" coords="13,191,176,218"/>
+<area shape="rect" id="node3" href="$structno__os__spi__desc.html" title="Structure holding SPI descriptor." alt="" coords="188,95,311,121"/>
+<area shape="rect" id="node4" href="$structno__os__spi__platform__ops.html" title="Structure holding SPI function pointers that point to the platform specific function." alt="" coords="5,5,184,32"/>
+<area shape="rect" id="node5" href="$structspi__engine__offload__init__param.html" title="Structure containing the init parameters needed by the offload module." alt="" coords="200,184,344,225"/>
+</map>

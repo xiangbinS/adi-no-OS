@@ -1,0 +1,10 @@
+<map id="adxcvr_write" name="adxcvr_write">
+<area shape="rect" id="node1" title="AXI ADXCVR Write." alt="" coords="660,81,767,108"/>
+<area shape="rect" id="node2" href="$axi__adxcvr_8h.html#a149984176c30c12dad5c193f4746fcb5" title="AXI ADXCVR Clock Disable." alt="" coords="465,31,612,57"/>
+<area shape="rect" id="node7" href="$axi__adxcvr_8h.html#a8d899f5b5004a4f001e45d725c0469f0" title="AXI ADXCVR DPR Port Read." alt="" coords="473,81,604,108"/>
+<area shape="rect" id="node8" href="$axi__adxcvr_8h.html#aced69997b25476d0e77f8e3f99e40995" title="AXI ADXCVR DPR Port Write." alt="" coords="471,132,606,159"/>
+<area shape="rect" id="node3" href="$jesd204__clk_8h.html#ac6c34646d1c05b88bf73af88f24bf6c4" title=" " alt="" coords="264,5,417,32"/>
+<area shape="rect" id="node6" href="$ad9208_2src_2main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="313,56,368,83"/>
+<area shape="rect" id="node4" href="$ad9081_2src_2app__jesd_8h.html#a5ef8f40129d0245e81e1a76cc451d2a6" title="Application JESD setup." alt="" coords="108,5,216,32"/>
+<area shape="rect" id="node5" href="$ad9081_2src_2app_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,5,60,32"/>
+</map>

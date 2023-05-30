@@ -1,0 +1,14 @@
+<map id="ad74413r_iio_desc" name="ad74413r_iio_desc">
+<area shape="rect" id="node1" title="Descriptor that stores a iio specific state." alt="" coords="398,291,541,317"/>
+<area shape="rect" id="node2" href="$structad74413r__desc.html" title="AD74413r device descriptor." alt="" coords="284,201,404,228"/>
+<area shape="rect" id="node3" href="$structno__os__spi__desc.html" title="Structure holding SPI descriptor." alt="" coords="33,103,156,130"/>
+<area shape="rect" id="node4" href="$structno__os__spi__platform__ops.html" title="Structure holding SPI function pointers that point to the platform specific function." alt="" coords="5,5,184,32"/>
+<area shape="rect" id="node5" href="$structad74413r__channel__config.html" title="Device channel state." alt="" coords="251,103,437,130"/>
+<area shape="rect" id="node6" href="$structiio__device.html" title="Structure holding channels and attributes of a device." alt="" coords="497,201,585,228"/>
+<area shape="rect" id="node7" href="$structiio__channel.html" title="Struct describing the scan type." alt="" coords="620,103,716,130"/>
+<area shape="rect" id="node8" href="$structiio__attribute.html" title="Structure holding pointers to show and store functions." alt="" coords="437,5,539,32"/>
+<area shape="rect" id="node9" href="$structiio__chan__type.html" title="IIO channel types." alt="" coords="568,5,680,32"/>
+<area shape="rect" id="node10" href="$structscan__type.html" title=" " alt="" coords="704,5,792,32"/>
+<area shape="rect" id="node11" href="$structno__os__irq__ctrl__desc.html" title=" " alt="" coords="785,103,935,130"/>
+<area shape="rect" id="node12" href="$structno__os__irq__platform__ops.html" title="Structure holding IRQ function pointers that point to the platform specific function." alt="" coords="817,5,994,32"/>
+</map>
