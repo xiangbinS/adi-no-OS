@@ -41,6 +41,7 @@
 #include "no_os_i2c.h"
 #include <stdlib.h>
 #include "no_os_error.h"
+#include "no_os_mutex.h"
 
 /**
  * @brief Initialize the I2C communication peripheral.
@@ -64,6 +65,7 @@ int32_t no_os_i2c_init(struct no_os_i2c_desc **desc,
 		return ret;
 
 	(*desc)->platform_ops = param->platform_ops;
+	(*desc)->mutex = param->mutex;
 
 	return 0;
 }
@@ -105,8 +107,12 @@ int32_t no_os_i2c_write(struct no_os_i2c_desc *desc,
 	if (!desc->platform_ops->i2c_ops_write)
 		return -ENOSYS;
 
-	return desc->platform_ops->i2c_ops_write(desc, data, bytes_number,
+	no_os_mutex_lock(desc->mutex);
+	int32_t ret = desc->platform_ops->i2c_ops_write(desc, data, bytes_number,
 			stop_bit);
+	no_os_mutex_unlock(desc->mutex);
+
+	return ret;
 }
 
 /**
@@ -130,6 +136,10 @@ int32_t no_os_i2c_read(struct no_os_i2c_desc *desc,
 	if (!desc->platform_ops->i2c_ops_read)
 		return -ENOSYS;
 
-	return desc->platform_ops->i2c_ops_read(desc, data, bytes_number,
-						stop_bit);
+	no_os_mutex_lock(desc->mutex);
+	int32_t ret = desc->platform_ops->i2c_ops_read(desc, data, bytes_number,
+			stop_bit);
+	no_os_mutex_unlock(desc->mutex);
+
+	return ret;
 }

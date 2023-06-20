@@ -41,6 +41,7 @@
 #include <stdlib.h>
 #include "no_os_eeprom.h"
 #include "no_os_error.h"
+#include "no_os_mutex.h"
 
 /**
  * @brief 	Initialize the EEPROM
@@ -64,6 +65,7 @@ int32_t no_os_eeprom_init(struct no_os_eeprom_desc **desc,
 		return ret;
 
 	(*desc)->platform_ops = param->platform_ops;
+	(*desc)->mutex = param->mutex;
 
 	return 0;
 }
@@ -101,7 +103,11 @@ int32_t no_os_eeprom_write(struct no_os_eeprom_desc *desc, uint32_t address,
 	if (!desc->platform_ops->write)
 		return -ENOSYS;
 
+	no_os_mutex_lock(desc->mutex);
+
 	return desc->platform_ops->write(desc, address, data, bytes);
+
+	no_os_mutex_unlock(desc->mutex);
 }
 
 /**
@@ -121,5 +127,9 @@ int32_t no_os_eeprom_read(struct no_os_eeprom_desc *desc, uint32_t address,
 	if (!desc->platform_ops->read)
 		return -ENOSYS;
 
+	no_os_mutex_lock(desc->mutex);
+
 	return desc->platform_ops->read(desc, address, data, bytes);
+
+	no_os_mutex_unlock(desc->mutex);
 }
