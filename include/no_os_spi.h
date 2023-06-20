@@ -119,6 +119,8 @@ struct no_os_spi_platform_ops ;
  * @brief Structure holding the parameters for SPI initialization
  */
 struct no_os_spi_init_param {
+	/** SPI mutex*/
+	void 			*mutex;
 	/** Device ID */
 	uint32_t	device_id;
 	/** maximum transfer speed */
@@ -141,6 +143,8 @@ struct no_os_spi_init_param {
  * @brief Structure holding SPI descriptor.
  */
 struct no_os_spi_desc {
+	/** SPI mutex*/
+	void 		*mutex;
 	/** Device ID */
 	uint32_t	device_id;
 	/** maximum transfer speed */

@@ -108,6 +108,8 @@ struct no_os_uart_platform_ops ;
  * @brief Structure holding the parameters for UART initialization
  */
 struct no_os_uart_init_param {
+	/** UART mutex*/
+	void 			*mutex;
 	/** UART Device ID */
 	uint8_t	device_id;
 	/** UART Interrupt ID */
@@ -132,6 +134,8 @@ struct no_os_uart_init_param {
  * @brief Stucture holding the UART descriptor.
  */
 struct no_os_uart_desc {
+	/** UART mutex*/
+	void 			*mutex;
 	/** UART Device ID */
 	uint8_t 	device_id;
 	/** UART Interrupt ID */

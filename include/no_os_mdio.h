@@ -63,6 +63,8 @@
  * @brief Parameters for an MDIO slave.
  */
 struct no_os_mdio_init_param {
+	/** MDIO mutex*/
+	void 		*mutex;
 	/** Device ID (when using MDIO peripheral), optional. */
 	int id;
 	/** Specifies if clause 45 frame format is supported by the slave,
@@ -81,6 +83,8 @@ struct no_os_mdio_init_param {
  * @brief MDIO device descriptor created with no_os_mdio_init().
  */
 struct no_os_mdio_desc {
+	/** MDIO mutex*/
+	void 		*mutex;
 	int id;
 	bool c45;
 	uint8_t addr;

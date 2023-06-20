@@ -62,6 +62,8 @@ struct no_os_eeprom_platform_ops;
  * @brief Structure holding the parameters for EEPROM initialization
  */
 struct no_os_eeprom_init_param {
+	/** EEPROM mutex*/
+	void 		*mutex;
 	/** Device ID */
 	uint32_t device_id;
 	const struct no_os_eeprom_platform_ops *platform_ops;
@@ -74,6 +76,8 @@ struct no_os_eeprom_init_param {
  * @brief Structure holding the EEPROM descriptor
  */
 struct no_os_eeprom_desc {
+	/** EEPROM mutex*/
+	void 		*mutex;
 	/** Device ID */
 	uint32_t device_id;
 	const struct no_os_eeprom_platform_ops *platform_ops;

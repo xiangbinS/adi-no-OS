@@ -55,6 +55,8 @@
  * @brief Structure holding timer descriptor
  */
 struct no_os_timer_desc {
+	/** Timer mutex*/
+	void 			*mutex;
 	/** timer ID */
 	uint16_t id;
 	/** timer count frequency (Hz) */
@@ -79,6 +81,8 @@ struct no_os_timer_platform_ops ;
  * @brief  Structure holding the parameters for timer initialization
  */
 struct no_os_timer_init_param {
+	/** Timer mutex*/
+	void 			*mutex;
 	/** timer ID */
 	uint16_t id;
 	/** timer count frequency (Hz) */

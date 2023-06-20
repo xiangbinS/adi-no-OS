@@ -62,6 +62,8 @@ struct no_os_i2c_platform_ops ;
  * @brief Structure holding the parameters for I2C initialization.
  */
 struct no_os_i2c_init_param {
+	/** I2C mutex*/
+	void 		*mutex;
 	/** Device ID */
 	uint32_t	device_id;
 	/** I2C maximum transfer speed supported */
@@ -79,6 +81,8 @@ struct no_os_i2c_init_param {
  * @brief Structure holding I2C descriptor
  */
 struct no_os_i2c_desc {
+	/** I2C mutex*/
+	void 		*mutex;
 	/** Device ID */
 	uint32_t	device_id;
 	/** I2C maximum transfer speed supported */

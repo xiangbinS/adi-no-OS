@@ -64,6 +64,8 @@ enum no_os_pwm_polarity {
  * @brief  Structure containing the init parameters needed by the PWM generator
  */
 struct no_os_pwm_init_param {
+	/** PWM mutex*/
+	void *mutex;
 	/** Pwm id (Ex. Pin number, timer_id) */
 	uint32_t id;
 	/** PWM generator period */
@@ -87,6 +89,8 @@ struct no_os_pwm_init_param {
  * @brief  Structure representing an PWM generator device
  */
 struct no_os_pwm_desc {
+	/** PWM mutex*/
+	void *mutex;
 	/** Pwm id */
 	uint32_t id;
 	/** PWM generator period */
