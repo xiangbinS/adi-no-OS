@@ -43,6 +43,8 @@
 
 static volatile unsigned long long _system_ticks = 0;
 
+#ifndef FREERTOS
+
 extern void SysTick_Handler(void);
 
 /* ************************************************************************** */
@@ -51,6 +53,8 @@ void SysTick_Handler(void)
 	MXC_DelayHandler();
 	_system_ticks++;
 }
+
+#endif
 
 /**
  * @brief Generate microseconds delay.
@@ -79,6 +83,10 @@ void no_os_mdelay(uint32_t msecs)
 struct no_os_time no_os_get_time(void)
 {
 	struct no_os_time t;
+
+#ifdef FREERTOS
+	unsigned long long _system_ticks  = (unsigned long long)xTaskGetTickCount();
+#endif
 
 	t.s = _system_ticks / 1000;
 
