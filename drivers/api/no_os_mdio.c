@@ -38,6 +38,7 @@
 *******************************************************************************/
 #include <errno.h>
 #include "no_os_mdio.h"
+#include "no_os_mutex.h"
 
 /**
  * @brief Initialize the MDIO interface.
@@ -64,6 +65,7 @@ int no_os_mdio_init(struct no_os_mdio_desc **desc,
 	(*desc)->c45 = param->c45;
 	(*desc)->addr = param->addr;
 	(*desc)->ops = param->ops;
+	(*desc)->mutex = param->mutex;
 
 	return 0;
 }
@@ -95,13 +97,19 @@ int no_os_mdio_remove(struct no_os_mdio_desc *desc)
  */
 int no_os_mdio_write(struct no_os_mdio_desc *desc, uint32_t reg, uint16_t val)
 {
+	int ret;
+
 	if (!desc || !desc->ops)
 		return -EINVAL;
 
 	if (!desc->ops->write)
 		return -ENOSYS;
 
-	return desc->ops->write(desc, reg, val);
+	no_os_mutex_lock(desc->mutex);
+	ret = desc->ops->write(desc, reg, val);
+	no_os_mutex_unlock(desc->mutex);
+
+	return ret;
 }
 
 /**
@@ -115,11 +123,17 @@ int no_os_mdio_write(struct no_os_mdio_desc *desc, uint32_t reg, uint16_t val)
  */
 int no_os_mdio_read(struct no_os_mdio_desc *desc, uint32_t reg, uint16_t *val)
 {
+	int ret;
+
 	if (!desc || !desc->ops)
 		return -EINVAL;
 
 	if (!desc->ops->read)
 		return -ENOSYS;
 
-	return desc->ops->read(desc, reg, val);
+	no_os_mutex_lock(desc->mutex);
+	ret = desc->ops->read(desc, reg, val);
+	no_os_mutex_unlock(desc->mutex);
+
+	return ret;
 }

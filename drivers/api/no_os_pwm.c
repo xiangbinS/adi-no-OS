@@ -41,6 +41,7 @@
 #include "no_os_pwm.h"
 #include <stdlib.h>
 #include "no_os_error.h"
+#include "no_os_mutex.h"
 
 /**
  * @brief Initialize the PWM peripheral.
@@ -64,6 +65,7 @@ int32_t no_os_pwm_init(struct no_os_pwm_desc **desc,
 		return ret;
 
 	(*desc)->platform_ops = param->platform_ops;
+	(*desc)->mutex = param->mutex;
 
 	return 0;
 }
@@ -97,6 +99,7 @@ int32_t no_os_pwm_enable(struct no_os_pwm_desc *desc)
 	if (!desc->platform_ops->pwm_ops_enable)
 		return -ENOSYS;
 
+	no_os_mutex_lock(desc->mutex);
 	return desc->platform_ops->pwm_ops_enable(desc);
 }
 
@@ -113,6 +116,7 @@ int32_t no_os_pwm_disable(struct no_os_pwm_desc *desc)
 	if (!desc->platform_ops->pwm_ops_disable)
 		return -ENOSYS;
 
+	no_os_mutex_unlock(desc->mutex);
 	return desc->platform_ops->pwm_ops_disable(desc);
 }
 

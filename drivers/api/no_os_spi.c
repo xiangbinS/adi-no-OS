@@ -41,6 +41,7 @@
 #include "no_os_spi.h"
 #include <stdlib.h>
 #include "no_os_error.h"
+#include "no_os_mutex.h"
 
 /**
  * @brief Initialize the SPI communication peripheral.
@@ -65,6 +66,7 @@ int32_t no_os_spi_init(struct no_os_spi_desc **desc,
 
 	(*desc)->platform_ops = param->platform_ops;
 	(*desc)->parent = param->parent;
+	(*desc)->mutex = param->mutex;
 
 	return 0;
 }
@@ -96,13 +98,19 @@ int32_t no_os_spi_write_and_read(struct no_os_spi_desc *desc,
 				 uint8_t *data,
 				 uint16_t bytes_number)
 {
+	int32_t ret;
+
 	if (!desc || !desc->platform_ops)
 		return -EINVAL;
 
 	if (!desc->platform_ops->write_and_read)
 		return -ENOSYS;
 
-	return desc->platform_ops->write_and_read(desc, data, bytes_number);
+	no_os_mutex_lock(desc->mutex);
+	ret =  desc->platform_ops->write_and_read(desc, data, bytes_number);
+	no_os_mutex_unlock(desc->mutex);
+
+	return ret;
 }
 
 /**
@@ -116,7 +124,7 @@ int32_t no_os_spi_transfer(struct no_os_spi_desc *desc,
 			   struct no_os_spi_msg *msgs,
 			   uint32_t len)
 {
-	int32_t  ret;
+	int32_t  ret = 0;
 	uint32_t i;
 
 	if (!desc || !desc->platform_ops)
@@ -125,14 +133,21 @@ int32_t no_os_spi_transfer(struct no_os_spi_desc *desc,
 	if (desc->platform_ops->transfer)
 		return desc->platform_ops->transfer(desc, msgs, len);
 
+	no_os_mutex_lock(desc->mutex);
+
 	for (i = 0; i < len; i++) {
-		if (msgs[i].rx_buff != msgs[i].tx_buff || !msgs[i].tx_buff)
-			return -EINVAL;
+		if (msgs[i].rx_buff != msgs[i].tx_buff || !msgs[i].tx_buff) {
+			ret = -EINVAL;
+			goto out;
+		}
 		ret = no_os_spi_write_and_read(desc, msgs[i].rx_buff,
 					       msgs[i].bytes_number);
-		if (NO_OS_IS_ERR_VALUE(ret))
-			return ret;
+		if (NO_OS_IS_ERR_VALUE(ret)) {
+			goto out;
+		}
 	}
 
+out:
+	no_os_mutex_unlock(desc->mutex);
 	return 0;
 }

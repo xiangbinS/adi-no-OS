@@ -42,6 +42,7 @@
 /******************************************************************************/
 #include "no_os_error.h"
 #include "no_os_timer.h"
+#include "no_os_mutex.h"
 
 /******************************************************************************/
 /************************ Functions Definitions *******************************/
@@ -69,6 +70,7 @@ int32_t no_os_timer_init(struct no_os_timer_desc **desc,
 		return ret;
 
 	(*desc)->platform_ops = param->platform_ops;
+	(*desc)->mutex = param->mutex;
 
 	return 0;
 }
@@ -102,6 +104,7 @@ int32_t no_os_timer_start(struct no_os_timer_desc *desc)
 	if (!desc->platform_ops->start)
 		return -ENOSYS;
 
+	no_os_mutex_lock(desc->mutex);
 	return desc->platform_ops->start(desc);
 }
 
@@ -118,6 +121,7 @@ int32_t no_os_timer_stop(struct no_os_timer_desc *desc)
 	if (!desc->platform_ops->stop)
 		return -ENOSYS;
 
+	no_os_mutex_unlock(desc->mutex);
 	return desc->platform_ops->stop(desc);
 }
 
