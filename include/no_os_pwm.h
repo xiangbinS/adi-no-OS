@@ -80,6 +80,8 @@ struct no_os_pwm_init_param {
 	const struct no_os_pwm_platform_ops *platform_ops;
 	/** PWM extra parameters (device specific) */
 	void *extra;
+	/** PWM mutex*/
+	void *mutex;
 };
 
 /**
@@ -105,6 +107,8 @@ struct no_os_pwm_desc {
 	const struct no_os_pwm_platform_ops *platform_ops;
 	/** PWM extra parameters (device specific) */
 	void *extra;
+	/** PWM mutex*/
+	void *mutex;
 };
 
 /**

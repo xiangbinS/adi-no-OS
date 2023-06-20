@@ -72,6 +72,8 @@ struct no_os_i2c_init_param {
 	const struct no_os_i2c_platform_ops *platform_ops;
 	/** I2C extra parameters (device specific parameters) */
 	void		*extra;
+	/** I2C mutex*/
+	void 		*mutex;
 };
 
 /**
@@ -89,6 +91,8 @@ struct no_os_i2c_desc {
 	const struct no_os_i2c_platform_ops *platform_ops;
 	/** I2C extra parameters (device specific parameters) */
 	void		*extra;
+	/** I2C mutex*/
+	void 		*mutex;
 };
 
 /**

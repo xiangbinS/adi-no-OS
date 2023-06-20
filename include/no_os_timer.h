@@ -65,6 +65,8 @@ struct no_os_timer_desc {
 	const struct no_os_timer_platform_ops *platform_ops;
 	/** timer extra parameters (device specific) */
 	void *extra;
+	/** Timer mutex*/
+	void 			*mutex;
 };
 
 /**
@@ -89,6 +91,8 @@ struct no_os_timer_init_param {
 	const struct no_os_timer_platform_ops *platform_ops;
 	/** timer extra parameters (device specific) */
 	void *extra;
+	/** Timer mutex*/
+	void 			*mutex;
 };
 
 /**

@@ -74,6 +74,8 @@ struct no_os_mdio_init_param {
 	struct no_os_mdio_ops *ops;
 	/** Platform or implementation specific parameters. */
 	void *extra;
+	/** MDIO mutex*/
+	void 		*mutex;
 };
 
 /**
@@ -86,6 +88,8 @@ struct no_os_mdio_desc {
 	uint8_t addr;
 	struct no_os_mdio_ops *ops;
 	void *extra;
+	/** EEPROM mutex*/
+	void 		*mutex;
 };
 
 /**
