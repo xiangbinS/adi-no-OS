@@ -125,6 +125,8 @@ struct no_os_uart_init_param {
 	const struct no_os_uart_platform_ops *platform_ops;
 	/** UART extra parameters (device specific) */
 	void		*extra;
+	/** UART mutex*/
+	void 			*mutex;
 };
 
 /**
@@ -143,6 +145,8 @@ struct no_os_uart_desc {
 	const struct no_os_uart_platform_ops *platform_ops;
 	/** UART extra parameters (device specific) */
 	void 		*extra;
+	/** UART mutex*/
+	void 			*mutex;
 };
 
 /**

@@ -67,6 +67,8 @@ struct no_os_eeprom_init_param {
 	const struct no_os_eeprom_platform_ops *platform_ops;
 	/** EEPROM extra parameters (device specific) */
 	void *extra;
+	/** EEPROM mutex*/
+	void 		*mutex;
 };
 
 /**
@@ -79,6 +81,8 @@ struct no_os_eeprom_desc {
 	const struct no_os_eeprom_platform_ops *platform_ops;
 	/** EEPROM extra parameters (device specific) */
 	void *extra;
+	/** EEPROM mutex*/
+	void 		*mutex;
 };
 
 /**

@@ -134,6 +134,8 @@ struct no_os_spi_init_param {
 	void		*extra;
 	/** Parent of the device */
 	struct no_os_spi_desc *parent;
+	/** SPI mutex*/
+	void 			*mutex;
 };
 
 /**
@@ -156,6 +158,8 @@ struct no_os_spi_desc {
 	void		*extra;
 	/** Parent of the device */
 	struct no_os_spi_desc *parent;
+	/** SPI mutex*/
+	void 		*mutex;
 };
 
 /**
