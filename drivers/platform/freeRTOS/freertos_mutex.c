@@ -49,6 +49,7 @@
 __attribute__((weak)) inline void no_os_mutex_init(void **mutex)
 {
 	*mutex = (SemaphoreHandle_t *)no_os_malloc(sizeof(SemaphoreHandle_t));
+	mutex = xSemaphoreCreateMutex();
 }
 
 /**
