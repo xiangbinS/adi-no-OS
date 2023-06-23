@@ -59,12 +59,17 @@
 #include "app_config.h"
 #include "xil_cache.h"
 
+#include "xilinx_irq.h"
+
 #ifdef IIO_SUPPORT
 #include "iio_app.h"
 #include "iio_axi_adc.h"
 #include "iio_axi_dac.h"
 #include "xilinx_uart.h"
 #endif
+
+uint32_t dac_buffer_dma[16384] __attribute__ ((aligned));
+uint16_t adc_buffer_dma[16384 * 8] __attribute__ ((aligned));
 
 #ifdef IIO_SUPPORT
 
@@ -202,13 +207,13 @@ int main(void)
 	struct axi_dmac_init rx_dmac_init = {
 		"rx_dmac",
 		RX_DMA_BASEADDR,
-		IRQ_DISABLED
+		IRQ_ENABLED
 	};
 	struct axi_dmac *rx_dmac;
 	struct axi_dmac_init tx_dmac_init = {
 		"tx_dmac",
 		TX_DMA_BASEADDR,
-		IRQ_DISABLED
+		IRQ_ENABLED
 	};
 	struct axi_dmac *tx_dmac;
 	struct ad9081_phy* phy[MULTIDEVICE_INSTANCE_COUNT];
@@ -286,6 +291,125 @@ int main(void)
 
 	axi_dmac_init(&tx_dmac, &tx_dmac_init);
 	axi_dmac_init(&rx_dmac, &rx_dmac_init);
+
+	extern const uint32_t sine_lut_iq[1024];
+	axi_dac_set_datasel(tx_dac, -1, AXI_DAC_DATA_SEL_DMA);
+	axi_dac_load_custom_data(tx_dac, sine_lut_iq,
+					 NO_OS_ARRAY_SIZE(sine_lut_iq),
+					 (uintptr_t)dac_buffer_dma);
+
+	/**
+	 * Xilinx platform dependent initialization for IRQ.
+	 */
+	struct xil_irq_init_param xil_irq_init_par = {
+		.type = IRQ_PS,
+	};
+
+	/**
+	 * IRQ initial configuration.
+	 */
+	struct no_os_irq_init_param irq_init_param = {
+		.irq_ctrl_id = INTC_DEVICE_ID,
+		.platform_ops = &xil_irq_ops,
+		.extra = &xil_irq_init_par,
+	};
+
+	/**
+	 * IRQ instance.
+	 */
+	struct no_os_irq_ctrl_desc *irq_desc;
+
+	status = no_os_irq_ctrl_init(&irq_desc, &irq_init_param);
+	if(status < 0)
+		return status;
+
+	status = no_os_irq_global_enable(irq_desc);
+	if (status < 0)
+		return status;
+
+	struct no_os_callback_desc rx_dmac_callback = {
+		.ctx = rx_dmac,
+		.callback = axi_dmac_dev_to_mem_isr,
+	};
+
+	status = no_os_irq_register_callback(irq_desc,
+						 141, &rx_dmac_callback);
+	if(status < 0)
+		return status;
+
+	status = no_os_irq_trigger_level_set(irq_desc,
+						 141, NO_OS_IRQ_LEVEL_HIGH);
+	if(status < 0)
+		return status;
+
+	status = no_os_irq_enable(irq_desc, 141);
+	if(status < 0)
+		return status;
+
+	struct no_os_callback_desc tx_dmac_callback = {
+		.ctx = tx_dmac,
+		.callback = axi_dmac_mem_to_dev_isr,
+	};
+
+	status = no_os_irq_register_callback(irq_desc,
+						 140, &tx_dmac_callback);
+	if(status < 0)
+		return status;
+
+	status = no_os_irq_enable(irq_desc, 140);
+	if(status < 0)
+		return status;
+
+	struct axi_dma_transfer transfer = {
+		// Number of bytes to write/read
+		.size = sizeof(sine_lut_iq),
+		// Transfer done flag
+		.transfer_done = 0,
+		// Signal transfer mode
+		.cyclic = CYCLIC,
+		// Address of data source
+		.src_addr = (uintptr_t)dac_buffer_dma,
+		// Address of data destination
+		.dest_addr = 0
+	};
+
+	/* Transfer the data. */
+	axi_dmac_transfer_start(tx_dmac, &transfer);
+
+	/* Flush cache data. */
+	Xil_DCacheInvalidateRange((uintptr_t)dac_buffer_dma, sizeof(sine_lut_iq));
+
+	printf("Tx %s\n", tx_dmac->name);
+
+	no_os_mdelay(1000);
+
+	struct axi_dma_transfer read_transfer = {
+		// Number of bytes to write/read
+		.size = sizeof(adc_buffer_dma),
+		// Transfer done flag
+		.transfer_done = 0,
+		// Signal transfer mode
+		.cyclic = NO,
+		// Address of data source
+		.src_addr = 0,
+		// Address of data destination
+		.dest_addr = (uintptr_t)adc_buffer_dma
+	};
+
+	/* Read the data from the ADC DMA. */
+	axi_dmac_transfer_start(rx_dmac, &read_transfer);
+
+	/* Wait until transfer finishes */
+	status = axi_dmac_transfer_wait_completion(rx_dmac, 500);
+	if(status < 0)
+		return status;
+
+	Xil_DCacheInvalidateRange((uintptr_t)adc_buffer_dma, sizeof(adc_buffer_dma));
+	printf("DMA_EXAMPLE: address=%#lx samples=%lu channels=%u bits=%lu\n",
+		   (uintptr_t)adc_buffer_dma, NO_OS_ARRAY_SIZE(adc_buffer_dma), rx_adc_init.num_channels,
+		   8 * sizeof(adc_buffer_dma[0]));
+
+	no_os_mdelay(5000);
 
 #ifdef IIO_SUPPORT
 
