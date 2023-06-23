@@ -44,6 +44,11 @@
 #include "stm32_i2c.h"
 
 /**
+ * @brief i2c_table contains the pointers towards the I2C buses
+*/
+static void *i2c_table[4];
+
+/**
  * @brief Initialize the I2C communication peripheral.
  * @param desc - The I2C descriptor.
  * @param param - The structure that contains the I2C parameters.

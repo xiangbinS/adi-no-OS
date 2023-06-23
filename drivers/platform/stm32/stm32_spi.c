@@ -46,6 +46,11 @@
 #include "no_os_delay.h"
 #include "no_os_alloc.h"
 
+/**
+ * @brief spi_table contains the pointers towards the SPI buses
+*/
+static void *spi_table[8];
+
 static int stm32_spi_config(struct no_os_spi_desc *desc)
 {
 	int ret;
