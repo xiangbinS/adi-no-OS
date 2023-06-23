@@ -57,6 +57,23 @@
  */
 struct no_os_i2c_platform_ops ;
 
+/** 
+ * @struct no_os_i2cbus_init_param
+ * @brief Structure holding I2C bus descriptor 
+*/
+struct no_os_i2cbus_init_param {
+	/** I2C bus Device ID */
+	uint32_t	device_id;
+	/** I2C bus maximum transfer speed supported */
+	uint32_t	max_speed_hz;
+	/** I2C bus slave address */
+	uint8_t		slave_address;
+	/** I2C bus platform specific functions */
+	const struct no_os_i2c_platform_ops *platform_ops;
+	/** I2C bus extra parameters (device specific parameters) */
+	void		*extra;
+};
+
 /**
  * @struct no_os_i2c_init_param
  * @brief Structure holding the parameters for I2C initialization.
@@ -75,10 +92,32 @@ struct no_os_i2c_init_param {
 };
 
 /**
+ * @struct no_os_i2cbus_desc
+ * @brief Structure holding I2C bus descriptor
+ */
+struct no_os_i2cbus_desc {
+        /** I2C bus mutex(lock)*/
+        void* mutex;
+	/** I2C bus Device ID */
+	uint32_t	device_id;
+	/** I2C bus maximum transfer speed supported */
+	uint32_t	max_speed_hz;
+	/** I2C bus Slave address */
+	uint8_t		slave_address;
+	/** I2C bus platform specific functions */
+	const struct no_os_i2c_platform_ops *platform_ops;
+	/** I2C bus extra parameters (device specific parameters) */
+	void		*extra;
+};
+
+
+/**
  * @struct no_os_i2c_desc
- * @brief Structure holding I2C descriptor
+ * @brief Structure holding I2C address descriptor
  */
 struct no_os_i2c_desc {
+        /** I2C bus address*/
+        struct no_os_i2cbus_desc *bus;
 	/** Device ID */
 	uint32_t	device_id;
 	/** I2C maximum transfer speed supported */

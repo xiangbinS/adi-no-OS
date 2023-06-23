@@ -115,6 +115,27 @@ struct no_os_spi_msg {
 struct no_os_spi_platform_ops ;
 
 /**
+ * @struct no_os_spibus_init_param
+ * @brief Structure for SPI bus initialization parameter
+*/
+struct no_os_spibus_init_param {
+        /** SPI bus chip ID */
+        uint32_t	device_id; 
+        /** SPI bus chip Select */
+        uint8_t		chip_select;
+        /** SPI bus max speed*/
+        uint32_t	max_speed_hz;
+        /** SPI bus mode*/
+        enum no_os_spi_mode	mode;
+        /** SPI bus bit order */
+        enum no_os_spi_bit_order	bit_order;
+        /** SPI bus platform ops*/
+        const struct no_os_spi_platform_ops *platform_ops;
+        /** SPI bus extra*/
+        void		*extra;
+};
+
+/**
  * @struct no_os_spi_init_param
  * @brief Structure holding the parameters for SPI initialization
  */
@@ -137,10 +158,32 @@ struct no_os_spi_init_param {
 };
 
 /**
+ * @struct no_os_spibus_desc
+ * @brief SPI bus descriptor
+*/
+struct no_os_spibus_desc {
+        /** SPI bus mutex (lock) */
+        void 		*mutex;				// created internally in no_os_spibus_init() at every call
+        /** SPI bus device id */
+        uint32_t	device_id;
+        /** SPI bus max speed */
+        uint32_t	max_speed_hz;
+        /** SPI bus mode */
+        enum no_os_spi_mode	mode;
+        /** SPI bus bit order */
+        enum no_os_spi_bit_order	bit_order;
+        /** SPI bus platform ops */
+        const struct no_os_spi_platform_ops *platform_ops;
+        /** SPI bus extra */
+        void		*extra;
+};
+
+/**
  * @struct no_os_spi_desc
  * @brief Structure holding SPI descriptor.
  */
 struct no_os_spi_desc {
+        struct no_os_spibus_desc	*bus; 
 	/** Device ID */
 	uint32_t	device_id;
 	/** maximum transfer speed */
